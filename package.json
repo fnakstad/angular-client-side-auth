@@ -1,0 +1,11 @@
+{
+    "name": "angular-client-side-auth",
+    "version": "0.0.1",
+    "dependencies": {
+        "express": "*",
+        "jade": "*",
+        "passport": "*",
+        "passport-local": "*",
+        "underscore": "*"
+    }
+}
