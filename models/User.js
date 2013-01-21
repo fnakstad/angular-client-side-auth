@@ -52,6 +52,7 @@ var localStrategy = new LocalStrategy(
         else {
             return done(null, user);
         }
+
     }
 )
 

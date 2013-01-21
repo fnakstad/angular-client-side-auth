@@ -6,6 +6,7 @@ head
     link(rel='stylesheet', href='css/app.css')
     link(href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css", rel="stylesheet")
     body(data-ng-controller="AppCtrl")
+
         ul.nav.nav-tabs(data-ng-controller="MenuCtrl")
             li(data-ng-show="showMenuItem(accessLevels.anon)", data-ng-class='{active: activeNavItem=="login"}')
                 a(href='/login') Log in
@@ -18,15 +19,15 @@ head
             li(data-ng-show="showMenuItem(accessLevels.admin)", data-ng-class='{active: activeNavItem=="admin"}')
                 a(href='/admin') Admin
             li(data-ng-show="showMenuItem(accessLevels.user)")
-                button.btn-link.logout-button(ng-click="logout()")
+                button.btn-link.logout-button(ng-click="logout()", style="padding:8px;border:0px;")
                     | Log out
         .container
             div(data-ng-view='ng-view')
-            span(data-ng-bind="userRole")
-            div(data-ng-bind="error")
+            .alert.alert-error(data-ng-bind="error", data-ng-show="error")
 
         script(src='lib/angular/angular.js')
         script(src='lib/angular/angular-cookies.js')
+        script(src='js/routingConfig.js')
         script(src='js/app.js')
         script(src='js/services.js')
         script(src='js/controllers.js')

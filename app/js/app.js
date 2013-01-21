@@ -1,22 +1,8 @@
 'use strict';
 
-angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 'ngCookies'])
+angular.module('myApp', ['myApp.services', 'ngCookies'])
 
-    .constant('routingConfig', {
-        userRoles: {
-            public: 1, // 001
-            user:   2, // 010
-            admin:  4  // 100
-        },
-        accessLevels: {
-            public: 7, // 111
-            anon:   1, // 001
-            user:   6, // 110
-            admin:  4  // 100
-        }
-    })
-
-    .config(['$routeProvider', '$locationProvider', 'routingConfig', function ($routeProvider, $locationProvider, routingConfig) {
+    .config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 
     var access = routingConfig.accessLevels;
 
@@ -30,13 +16,13 @@ angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 
         {
             templateUrl:    'partials/login',
             controller:     LoginCtrl,
-            access:         access.public
+            access:         access.anon
         });
     $routeProvider.when('/register',
         {
             templateUrl:    'partials/register',
             controller:     RegisterCtrl,
-            access:         access.public
+            access:         access.anon
         });
     $routeProvider.when('/private',
         {
@@ -59,17 +45,40 @@ angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 
 
     $locationProvider.html5Mode(true);
 
+    var interceptor = ['$location', '$q', function($location, $q) {
+        function success(response) {
+            console.log(response);
+            return response;
+        }
+
+        function error(response) {
+
+            if(response.status == 401) {
+                $location.path('/login');
+                return $q.reject(response);
+            }
+            else {
+                return $q.reject(response);
+            }
+        }
+
+        return function(promise) {
+            return promise.then(success, error);
+        }
+    }];
+
+    $httpProvider.responseInterceptors.push(interceptor);
+
 }])
 
-    .run(['$rootScope', '$location', '$cookieStore', 'routingConfig', function ($rootScope, $location, $cookieStore, routingConfig) {
+    .run(['$rootScope', '$location', '$cookieStore', function ($rootScope, $location, $cookieStore) {
 
-        $rootScope.accessLevels = routingConfig.accessLevels;
         $rootScope.userRole = $cookieStore.get('userRole') || routingConfig.userRoles.public;
         $cookieStore.remove('userRole');
 
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
             if (!(next.$route.access & $rootScope.userRole)) {
-                if($rootScope.userRole == routingConfig.userRoles.user) {
+                if($rootScope.userRole == routingConfig.userRoles.user || $rootScope.userRole == routingConfig.userRoles.admin) {
                     $location.path('/');
                 }
                 else {

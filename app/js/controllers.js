@@ -2,14 +2,35 @@
 
 /* Controllers */
 
-function AppCtrl($rootScope, $scope, $location, Auth, routingConfig) {
+function AppCtrl($rootScope, $scope, $location, Auth) {
+
+    $rootScope.accessLevels = routingConfig.accessLevels;
+
     $scope.logout = function() {
         Auth.logout(function() {
             $rootScope.userRole = routingConfig.userRoles.public;
             $location.path('/login');
         }, function() {
-            // Error
+            $rootScope.error = "Failed to logout";
         });
+    };
+}
+
+function LoginCtrl($rootScope, $scope, $location, Auth) {
+    $rootScope.activeNavItem = 'login';
+
+    $scope.login = function() {
+        Auth.login({
+                username: $scope.username,
+                password: $scope.password
+            },
+            function(res) {
+                $rootScope.userRole = res.userRole;
+                $location.path('/');
+            },
+            function(err) {
+                $rootScope.error = "Failed to login";
+            });
     };
 }
 
@@ -21,24 +42,6 @@ function MenuCtrl($rootScope, $scope) {
 
 function HomeCtrl($rootScope) {
     $rootScope.activeNavItem = 'home';
-}
-
-function LoginCtrl($rootScope, $scope, $location, Auth) {
-    $rootScope.activeNavItem = 'login';
-
-    $scope.login = function() {
-        Auth.login({
-            username: $scope.username,
-            password: $scope.password
-        },
-        function(res) {
-            $rootScope.userRole = res.userRole;
-            $location.path('/');
-        },
-        function(err) {
-            $rootScope.error = "Failed to login";
-        });
-    };
 }
 
 function RegisterCtrl($rootScope, $scope, $location, Auth) {

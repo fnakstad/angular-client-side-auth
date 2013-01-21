@@ -4,7 +4,7 @@ var path = require('path')
 
 module.exports = function(app) {
 
-    // Partial views
+    // Views
     app.get('/partials/*', function (req, res) {
         var requestedView = path.join('./', req.url);
         res.render(requestedView);
