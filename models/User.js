@@ -31,11 +31,11 @@ function addUser(username, password) {
 };
 
 function findById (id) {
-    return _.find(users, function(user) { return user.id == id });
+    return _.find(users, function(user) { return user.id === id });
 };
 
 function findByUsername(username) {
-    return _.find(users, function(user) { return user.username == username; });
+    return _.find(users, function(user) { return user.username === username; });
 };
 
 var localStrategy = new LocalStrategy(

@@ -53,7 +53,7 @@ angular.module('myApp', ['myApp.services', 'ngCookies'])
 
         function error(response) {
 
-            if(response.status == 401) {
+            if(response.status === 401) {
                 $location.path('/login');
                 return $q.reject(response);
             }
@@ -78,7 +78,7 @@ angular.module('myApp', ['myApp.services', 'ngCookies'])
 
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
             if (!(next.$route.access & $rootScope.userRole)) {
-                if($rootScope.userRole == routingConfig.userRoles.user || $rootScope.userRole == routingConfig.userRoles.admin) {
+                if($rootScope.userRole === routingConfig.userRoles.user || $rootScope.userRole === routingConfig.userRoles.admin) {
                     $location.path('/');
                 }
                 else {
