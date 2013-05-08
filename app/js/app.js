@@ -85,4 +85,6 @@ angular.module('myApp', ['myApp.services', 'ngCookies'])
                 }
             }
         });
+
+        $rootScope.appInitialized = true;
     }]);

@@ -7,6 +7,8 @@ head
     link(href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css", rel="stylesheet")
     body(data-ng-controller="AppCtrl")
 
+        #cover(style="position:absolute;height:100%;width:100%;background:white;", data-ng-hide="appInitialized")
+
         ul.nav.nav-tabs(data-ng-controller="MenuCtrl")
             li(data-ng-show="showMenuItem(accessLevels.anon)", data-ng-class='{active: activeNavItem == "login"}')
                 a(href='/login') Log in
