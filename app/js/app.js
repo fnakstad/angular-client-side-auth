@@ -47,7 +47,6 @@ angular.module('myApp', ['myApp.services', 'ngCookies'])
 
     var interceptor = ['$location', '$q', function($location, $q) {
         function success(response) {
-            console.log(response);
             return response;
         }
 

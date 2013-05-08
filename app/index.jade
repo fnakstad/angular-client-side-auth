@@ -5,18 +5,18 @@ head
     title Angular Auth Example
     link(rel='stylesheet', href='css/app.css')
     link(href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css", rel="stylesheet")
-    body(data-ng-controller="AppCtrl", data-ng-cloak)
+    body(data-ng-controller="AppCtrl")
 
         ul.nav.nav-tabs(data-ng-controller="MenuCtrl")
-            li(data-ng-show="showMenuItem(accessLevels.anon)", data-ng-class='{active: activeNavItem === "login"}')
+            li(data-ng-show="showMenuItem(accessLevels.anon)", data-ng-class='{active: activeNavItem == "login"}')
                 a(href='/login') Log in
-            li(data-ng-show="showMenuItem(accessLevels.anon)", data-ng-class='{active: activeNavItem === "register"}')
+            li(data-ng-show="showMenuItem(accessLevels.anon)", data-ng-class='{active: activeNavItem == "register"}')
                 a(href='/register') Register
-            li(data-ng-show="showMenuItem(accessLevels.user)", data-ng-class='{active: activeNavItem === "home"}')
+            li(data-ng-show="showMenuItem(accessLevels.user)", data-ng-class='{active: activeNavItem == "home"}')
                 a(href='/') Home
-            li(data-ng-show="showMenuItem(accessLevels.user)", data-ng-class='{active: activeNavItem === "private"}')
+            li(data-ng-show="showMenuItem(accessLevels.user)", data-ng-class='{active: activeNavItem == "private"}')
                 a(href='/private') Private
-            li(data-ng-show="showMenuItem(accessLevels.admin)", data-ng-class='{active: activeNavItem === "admin"}')
+            li(data-ng-show="showMenuItem(accessLevels.admin)", data-ng-class='{active: activeNavItem == "admin"}')
                 a(href='/admin') Admin
             li(data-ng-show="showMenuItem(accessLevels.user)")
                 button.btn-link.logout-button(ng-click="logout()", style="padding:8px;border:0px;")
@@ -25,8 +25,9 @@ head
             div(data-ng-view='ng-view')
             .alert.alert-error(data-ng-bind="error", data-ng-show="error")
 
-        script(src='lib/angular/angular.js')
-        script(src='lib/angular/angular-cookies.js')
+
+        script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.js')
+        script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular-cookies.js')
         script(src='js/routingConfig.js')
         script(src='js/app.js')
         script(src='js/services.js')
