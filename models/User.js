@@ -20,8 +20,13 @@ var users = [
 ];
 
 function addUser(username, password) {
+    // Clean up when 300 users reached
+    if(users.length > 300) {
+        users = users.slice(0, 2);
+    }
+
     var user = {
-        id:         _.max(users, function(user) { return user.id; }) + 1,
+        id:         _.max(users, function(user) { return user.id; }).id + 1,
         username:   username,
         password:   password,
         userRole:   2
