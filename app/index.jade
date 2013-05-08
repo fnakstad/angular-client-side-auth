@@ -7,7 +7,7 @@ head
     link(href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css", rel="stylesheet")
     body(data-ng-controller="AppCtrl")
 
-        #cover(style="position:absolute;height:100%;width:100%;background:white;", data-ng-hide="appInitialized")
+        #cover(data-ng-hide="appInitialized", data-ng-animate="{ hide: 'fade-hide' }")
 
         ul.nav.nav-tabs(data-ng-controller="MenuCtrl")
             li(data-ng-show="showMenuItem(accessLevels.anon)", data-ng-class='{active: activeNavItem == "login"}')
@@ -28,8 +28,8 @@ head
             .alert.alert-error(data-ng-bind="error", data-ng-show="error")
 
 
-        script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.js')
-        script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular-cookies.js')
+        script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.js')
+        script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.js')
         script(src='js/routingConfig.js')
         script(src='js/app.js')
         script(src='js/services.js')
