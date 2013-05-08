@@ -5,7 +5,7 @@ head
     title Angular Auth Example
     link(rel='stylesheet', href='css/app.css')
     link(href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css", rel="stylesheet")
-    body(data-ng-controller="AppCtrl")
+    body(data-ng-controller="AppCtrl", data-ng-cloak)
 
         ul.nav.nav-tabs(data-ng-controller="MenuCtrl")
             li(data-ng-show="showMenuItem(accessLevels.anon)", data-ng-class='{active: activeNavItem === "login"}')
