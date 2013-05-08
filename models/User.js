@@ -1,20 +1,21 @@
 var User
     , _ =               require('underscore')
     , passport =        require('passport')
-    , LocalStrategy =   require('passport-local').Strategy;
+    , LocalStrategy =   require('passport-local').Strategy
+    , userRoles =       require('../app/js/routingConfig').userRoles;
 
 var users = [
     {
         id:         1,
         username:   "user",
         password:   "123",
-        userRole:   2
+        userRole:   userRoles.user
     },
     {
         id:         2,
         username:   "admin",
         password:   "123",
-        userRole:   4
+        userRole:   userRoles.admin
     }
 ];
 
