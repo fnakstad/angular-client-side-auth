@@ -7,5 +7,12 @@
         "passport": "*",
         "passport-local": "*",
         "underscore": "*"
+    },
+    "subdomain": "angular-client-side-auth",
+    "scripts": {
+        "start": "server.js"
+    },
+    "engines": {
+        "node": "0.8.x"
     }
 }
