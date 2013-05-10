@@ -26,6 +26,7 @@ head
             li#userInfo(data-ng-show="showMenuItem(accessLevels.user)")
                 | Welcome&nbsp;
                 span.label(data-ng-class='{"label-info": user.role == userRoles.user, "label-success": user.role == userRoles.admin}')  {{ user.username }}
+
         .container
             div(data-ng-view='ng-view')
             .alert.alert-error(data-ng-bind="error", data-ng-show="error")

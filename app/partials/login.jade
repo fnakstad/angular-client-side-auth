@@ -1,21 +1,22 @@
-h1 Log in
-
-.alert.alert-info
-    |  Try logging in as
-    strong  user/123
-    |  or
-    strong  admin/123
-    |  or register a new user
-
-form.form-horizontal(ng-submit="login()", name="loginForm")
-    .control-group
-        label.control-label(for="username") Username
-        .controls
-            input(type="text", ng-model="username", placeholder="Username", name="username", required)
-    .control-group
-        label.control-label(for="password") Password
-        .controls
-            input(type="password", ng-model="password", placeholder="Password", name="password", required)
-    .control-group
-        .controls
-            button.btn(type="submit") Submit
+.hero-unit
+    h1 Log in
+    p This site is an example of how one can implement role based authentication in Angular applications as outlined in
+        a(href="http://www.frederiknakstad.com/authentication-in-single-page-applications-with-angular-js/")  this blogpost
+        | . All the code can be found in
+        a(href="https://github.com/fnakstad/angular-client-side-auth")  this GitHub repository
+        | . You can either register a new user, or log in with one of the two predefined users:
+        ul
+            li admin/123
+            li user/123
+    form.form-horizontal(ng-submit="login()", name="loginForm")
+        .control-group
+            label.control-label(for="username") Username
+            .controls
+                input(type="text", ng-model="username", placeholder="Username", name="username", required)
+        .control-group
+            label.control-label(for="password") Password
+            .controls
+                input(type="password", ng-model="password", placeholder="Password", name="password", required)
+        .control-group
+            .controls
+                button.btn(type="submit") Submit
