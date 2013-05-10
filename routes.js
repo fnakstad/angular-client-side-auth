@@ -1,6 +1,7 @@
-var path = require('path')
-    , passport = require('passport')
-    , User = require('./models/User.js');
+var path =        require('path')
+    , passport =  require('passport')
+    , User =      require('./models/User.js')
+    , userRoles = require('./app/js/routingConfig').userRoles;
 
 module.exports = function(app) {
 
@@ -21,7 +22,7 @@ module.exports = function(app) {
                     if(err) {
                         return next(err);
                     }
-                    res.json(200, { "userRole": user.userRole });
+                    res.json(200, { "role": user.role, "username": user.username });
                 });
             })(req, res, next);
     });
@@ -35,17 +36,21 @@ module.exports = function(app) {
         var user = User.addUser(req.body.username, req.body.password);
         req.logIn(user, function(err) {
             if(err)     { next(err); }
-            else        { res.json(200, { "userRole": user.userRole }); }
+            else        { res.json(200, { "role": user.role, "username": user.username }); }
         });
     });
 
     // All other get requests should be handled by AngularJS's client-side routing system
     app.get('/*', function(req, res){
-        var userRole = 1;
+        var role = userRoles.public, username = '';
         if(req.user) {
-            userRole = req.user.userRole;
+            role = req.user.role;
+            username = req.user.username;
         }
-        res.cookie('userRole', userRole);
+        res.cookie('user', JSON.stringify({
+            'username': username,
+            'role': role
+        }));
         res.render('index');
     });
 }

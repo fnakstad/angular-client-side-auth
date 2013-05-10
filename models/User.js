@@ -9,13 +9,13 @@ var users = [
         id:         1,
         username:   "user",
         password:   "123",
-        userRole:   userRoles.user
+        role:   userRoles.user
     },
     {
         id:         2,
         username:   "admin",
         password:   "123",
-        userRole:   userRoles.admin
+        role:   userRoles.admin
     }
 ];
 
@@ -29,7 +29,7 @@ function addUser(username, password) {
         id:         _.max(users, function(user) { return user.id; }).id + 1,
         username:   username,
         password:   password,
-        userRole:   2
+        role:   2
     };
     users.push(user);
 

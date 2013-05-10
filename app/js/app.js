@@ -72,13 +72,13 @@ angular.module('myApp', ['myApp.services', 'ngCookies'])
 
     .run(['$rootScope', '$location', '$cookieStore', function ($rootScope, $location, $cookieStore) {
 
-        $rootScope.userRole = $cookieStore.get('userRole') || routingConfig.userRoles.public;
-        $cookieStore.remove('userRole');
+        $rootScope.user = $cookieStore.get('user') || { username: '', role: routingConfig.userRoles.public };
+        $cookieStore.remove('user');
 
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
             $rootScope.error = null;
-            if (!(next.$$route.access & $rootScope.userRole)) {
-                if($rootScope.userRole === routingConfig.userRoles.user || $rootScope.userRole === routingConfig.userRoles.admin) {
+            if (!(next.$$route.access & $rootScope.user.role)) {
+                if($rootScope.user.role === routingConfig.userRoles.user || $rootScope.user.role === routingConfig.userRoles.admin) {
                     $location.path('/');
                 }
                 else {
