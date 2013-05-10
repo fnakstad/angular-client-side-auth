@@ -48,11 +48,13 @@ function HomeCtrl($rootScope) {
 
 function RegisterCtrl($rootScope, $scope, $location, Auth) {
     $rootScope.activeNavItem = 'register';
+    $scope.role = routingConfig.userRoles.user;
 
     $scope.register = function() {
         Auth.register({
                 username: $scope.username,
-                password: $scope.password
+                password: $scope.password,
+                role: $scope.role
             },
             function(res) {
                 $rootScope.user = res;

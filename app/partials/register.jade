@@ -9,5 +9,12 @@ form.form-horizontal(ng-submit="register()", name="registerForm")
         .controls
             input(type="password", ng-model="password", placeholder="Password", name="password", required)
     .control-group
+        label.radio.inline
+            input(type="radio", name="role", ng-model="role", id="adminRole", ng-value="{{ userRoles.admin }}")
+            | Administrator
+        label.radio.inline
+            input(type="radio", name="role", ng-model="role", id="adminRole", ng-value="{{ userRoles.user }}")
+            | Normal user
+    .control-group
         .controls
             button.btn(type="submit") Submit
