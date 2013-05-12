@@ -77,7 +77,7 @@ angular.module('myApp', ['myApp.services', 'ngCookies'])
 
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
             $rootScope.error = null;
-            if (!(next.$$route.access & $rootScope.user.role)) {
+            if (!(next.access & $rootScope.user.role)) {
                 if($rootScope.user.role === routingConfig.userRoles.user || $rootScope.user.role === routingConfig.userRoles.admin) {
                     $location.path('/');
                 }
