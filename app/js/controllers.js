@@ -61,7 +61,8 @@ function RegisterCtrl($rootScope, $scope, $location, Auth) {
                 $location.path('/');
             },
             function(err) {
-                $rootScope.error = "Failed to register";
+                console.log(err);
+                $rootScope.error = err;
             });
     };
 }

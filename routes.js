@@ -33,10 +33,14 @@ module.exports = function(app) {
     });
 
     app.post('/register', function(req, res, next) {
-        var user = User.addUser(req.body.username, req.body.password, req.body.role);
-        req.logIn(user, function(err) {
-            if(err)     { next(err); }
-            else        { res.json(200, { "role": user.role, "username": user.username }); }
+        User.addUser(req.body.username, req.body.password, req.body.role, function(err, user) {
+            if(err === 'UserAlreadyExists') return res.send(403, "User already exists");
+            else if(err)                    return res.send(500);
+
+            req.logIn(user, function(err) {
+                if(err)     { next(err); }
+                else        { res.json(200, { "role": user.role, "username": user.username }); }
+            });
         });
     });
 

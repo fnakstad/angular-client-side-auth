@@ -19,9 +19,11 @@ var users = [
     }
 ];
 
-function addUser(username, password, role) {
-    // Clean up when 300 users reached
-    if(users.length > 300) {
+function addUser(username, password, role, callback) {
+    if(findByUsername(username) !== undefined)  return callback("UserAlreadyExists");
+
+    // Clean up when 500 users reached
+    if(users.length > 500) {
         users = users.slice(0, 2);
     }
 
@@ -32,8 +34,7 @@ function addUser(username, password, role) {
         role:       role
     };
     users.push(user);
-
-    return user;
+    callback(null, user);
 };
 
 function findById (id) {
