@@ -19,4 +19,9 @@
                 input(type="password", ng-model="password", placeholder="Password", name="password", required)
         .control-group
             .controls
+                label(for="rememberme").checkbox
+                    input(type="checkbox", ng-model="rememberme", name="rememberme")
+                    | Remember me
+        .control-group
+            .controls
                 button.btn(type="submit") Submit

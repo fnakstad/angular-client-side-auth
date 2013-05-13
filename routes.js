@@ -18,10 +18,13 @@ module.exports = function(app) {
                 if(err)     { return next(err); }
                 if(!user)   { return res.send(400); }
 
+
                 req.logIn(user, function(err) {
                     if(err) {
                         return next(err);
                     }
+
+                    if(req.body.rememberme) req.session.cookie.maxAge = 1000 * 60 * 60 * 24 * 7;
                     res.json(200, { "role": user.role, "username": user.username });
                 });
             })(req, res, next);
