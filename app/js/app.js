@@ -8,37 +8,37 @@ angular.module('myApp', ['myApp.services', 'ngCookies'])
 
     $routeProvider.when('/',
         {
-            templateUrl:    'partials/home',
+            templateUrl:    '/partials/home',
             controller:     HomeCtrl,
             access:         access.user
         });
     $routeProvider.when('/login',
         {
-            templateUrl:    'partials/login',
+            templateUrl:    '/partials/login',
             controller:     LoginCtrl,
             access:         access.anon
         });
     $routeProvider.when('/register',
         {
-            templateUrl:    'partials/register',
+            templateUrl:    '/partials/register',
             controller:     RegisterCtrl,
             access:         access.anon
         });
     $routeProvider.when('/private',
         {
-            templateUrl:    'partials/private',
+            templateUrl:    '/partials/private',
             controller:     PrivateCtrl,
             access:         access.user
         });
     $routeProvider.when('/admin',
         {
-            templateUrl:    'partials/admin',
+            templateUrl:    '/partials/admin',
             controller:     AdminCtrl,
             access:         access.admin
         });
     $routeProvider.when('/404',
         {
-            templateUrl:    'partials/404',
+            templateUrl:    '/partials/404',
             access:         access.public
         });
     $routeProvider.otherwise({redirectTo:'/404'});
