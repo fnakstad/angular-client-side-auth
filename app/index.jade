@@ -1,5 +1,5 @@
 !!! 5
-html(lang='en', data-ng-app='myApp')
+html(lang='en', data-ng-app='angular-client-side-auth')
 head
     meta(charset='utf-8')
     title Angular Auth Example
@@ -25,13 +25,14 @@ head
                     | Log out
             li#userInfo(data-ng-show="showMenuItem(accessLevels.user)")
                 | Welcome&nbsp;
-                span.label(data-ng-class='{"label-info": user.role == userRoles.user, "label-success": user.role == userRoles.admin}')  {{ user.username }}
+                span {{ user.username }}&nbsp;
+                span.label(data-ng-class='{"label-info": user.role == userRoles.user, "label-success": user.role == userRoles.admin}') {{ getUserRoleText() }}
 
         .container
             div(data-ng-view='ng-view')
             .alert.alert-error(data-ng-bind="error", data-ng-show="error")
 
-
+        script(src='http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js')
         script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.js')
         script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.js')
         script(src='/js/routingConfig.js')

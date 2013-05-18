@@ -4,8 +4,9 @@
 
 function AppCtrl($rootScope, $scope, $location, Auth) {
 
-    $rootScope.accessLevels = routingConfig.accessLevels;
-    $rootScope.userRoles = routingConfig.userRoles;
+    $scope.getUserRoleText = function() {
+        return _.invert($rootScope.userRoles)[$rootScope.user.role];
+    };
 
     $scope.logout = function() {
         Auth.logout(function() {
@@ -28,7 +29,6 @@ function LoginCtrl($rootScope, $scope, $location, Auth) {
                 rememberme: $scope.rememberme
             },
             function(res) {
-                console.log(res);
                 $rootScope.user = res;
                 $location.path('/');
             },
@@ -63,7 +63,6 @@ function RegisterCtrl($rootScope, $scope, $location, Auth) {
                 $location.path('/');
             },
             function(err) {
-                console.log(err);
                 $rootScope.error = err;
             });
     };

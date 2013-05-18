@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp', ['myApp.services', 'ngCookies'])
+angular.module('angular-client-side-auth', ['angular-client-side-auth.services', 'ngCookies'])
 
     .config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 
@@ -71,6 +71,9 @@ angular.module('myApp', ['myApp.services', 'ngCookies'])
 }])
 
     .run(['$rootScope', '$location', '$cookieStore', function ($rootScope, $location, $cookieStore) {
+
+        $rootScope.accessLevels = routingConfig.accessLevels;
+        $rootScope.userRoles = routingConfig.userRoles;
 
         $rootScope.user = $cookieStore.get('user') || { username: '', role: routingConfig.userRoles.public };
         $cookieStore.remove('user');
