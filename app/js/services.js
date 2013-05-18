@@ -1,8 +1,9 @@
 'use strict';
 
 /* Services */
+var services = angular.module('angular-client-side-auth.services', []);
 
-angular.module('angular-client-side-auth.services', []).factory('Auth', function($http){
+services.factory('Auth', function($http){
     return {
         register: function(user, success, error) {
             $http.post('/register', user).success(success).error(error);
