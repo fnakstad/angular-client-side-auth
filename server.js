@@ -13,10 +13,9 @@ app.use(express.cookieParser());
 app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.static(path.join(__dirname, 'app')));
-app.use(express.session(
+app.use(express.cookieSession(
     {
-        secret: "Superdupersecret"/*,
-        cookie: { maxAge: 3600000 * 24 * 7 } */
+        secret: "Superdupersecret"
     }));
 app.use(passport.initialize());
 app.use(passport.session());
