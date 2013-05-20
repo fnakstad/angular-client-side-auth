@@ -1,6 +1,8 @@
 var _ =           require('underscore')
     , path =      require('path')
     , passport =  require('passport')
+    , AuthCtrl =  require('./controllers/auth')
+    , UserCtrl =  require('./controllers/user')
     , User =      require('./models/User.js')
     , userRoles = require('../client/js/routingConfig').userRoles;
 
@@ -13,49 +15,12 @@ module.exports = function(app) {
     });
 
     // Auth stuff
-    app.post('/login', function(req, res, next) {
-        passport.authenticate('local',
-            function(err, user) {
-                if(err)     { return next(err); }
-                if(!user)   { return res.send(400); }
+    app.post('/register', AuthCtrl.register);
+    app.post('/login', AuthCtrl.login);
+    app.post('/logout', AuthCtrl.logout);
 
-
-                req.logIn(user, function(err) {
-                    if(err) {
-                        return next(err);
-                    }
-
-                    if(req.body.rememberme) req.session.cookie.maxAge = 1000 * 60 * 60 * 24 * 7;
-                    res.json(200, { "role": user.role, "username": user.username });
-                });
-            })(req, res, next);
-    });
-
-    app.post('/logout', function(req, res) {
-        req.logout();
-        res.send(200);
-    });
-
-    app.post('/register', function(req, res, next) {
-        User.addUser(req.body.username, req.body.password, req.body.role, function(err, user) {
-            if(err === 'UserAlreadyExists') return res.send(403, "User already exists");
-            else if(err)                    return res.send(500);
-
-            req.logIn(user, function(err) {
-                if(err)     { next(err); }
-                else        { res.json(200, { "role": user.role, "username": user.username }); }
-            });
-        });
-    });
-
-    app.get('/users', function(req, res) { // Only accessible to administrator!
-        if(!req.user)                         return res.send(403);
-        if(req.user.role !== userRoles.admin) return res.send(403);
-
-        var users = User.findAll();
-        _.each(users, function(user) { delete user.password; });
-        res.json(users);
-    });
+    // User resource
+    app.get('/users', UserCtrl.index);
 
     // All other get requests should be handled by AngularJS's client-side routing system
     app.get('/*', function(req, res){
