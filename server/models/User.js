@@ -2,7 +2,7 @@ var User
     , _ =               require('underscore')
     , passport =        require('passport')
     , LocalStrategy =   require('passport-local').Strategy
-    , userRoles =       require('../app/js/routingConfig').userRoles;
+    , userRoles =       require('../../client/js/routingConfig').userRoles;
 
 var users = [
     {

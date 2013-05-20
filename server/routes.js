@@ -1,7 +1,7 @@
 var path =        require('path')
     , passport =  require('passport')
     , User =      require('./models/User.js')
-    , userRoles = require('./app/js/routingConfig').userRoles;
+    , userRoles = require('../client/js/routingConfig').userRoles;
 
 module.exports = function(app) {
 
