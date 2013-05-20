@@ -37,7 +37,11 @@ function addUser(username, password, role, callback) {
     callback(null, user);
 };
 
-function findById (id) {
+function findAll() {
+    return users;
+};
+
+function findById(id) {
     return _.find(users, function(user) { return user.id === id });
 };
 
@@ -75,6 +79,7 @@ function deserializeUser(id, done) {
 
 module.exports = {
     addUser: addUser,
+    findAll: findAll,
     findById: findById,
     findByUsername: findByUsername,
     localStrategy: localStrategy,

@@ -16,3 +16,11 @@ services.factory('Auth', function($http){
         }
     };
 });
+
+services.factory('Users', function($http) {
+    return {
+        getAll: function(success, error) {
+            $http.get('/users').success(success).error(error);
+        }
+    };
+});

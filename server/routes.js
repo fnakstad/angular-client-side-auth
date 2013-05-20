@@ -1,4 +1,5 @@
-var path =        require('path')
+var _ =           require('underscore')
+    , path =      require('path')
     , passport =  require('passport')
     , User =      require('./models/User.js')
     , userRoles = require('../client/js/routingConfig').userRoles;
@@ -45,6 +46,15 @@ module.exports = function(app) {
                 else        { res.json(200, { "role": user.role, "username": user.username }); }
             });
         });
+    });
+
+    app.get('/users', function(req, res) { // Only accessible to administrator!
+        if(!req.user)                         return res.send(403);
+        if(req.user.role !== userRoles.admin) return res.send(403);
+
+        var users = User.findAll();
+        _.each(users, function(user) { delete user.password; });
+        res.json(users);
     });
 
     // All other get requests should be handled by AngularJS's client-side routing system

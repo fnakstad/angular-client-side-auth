@@ -74,4 +74,5 @@ function PrivateCtrl($rootScope) {
 
 function AdminCtrl($rootScope) {
     $rootScope.activeNavItem = 'admin';
+    $scope
 }
