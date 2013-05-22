@@ -70,23 +70,13 @@ angular.module('angular-client-side-auth', ['angular-client-side-auth.services',
 
 }])
 
-    .run(['$rootScope', '$location', '$cookieStore', function ($rootScope, $location, $cookieStore) {
-
-        $rootScope.accessLevels = routingConfig.accessLevels;
-        $rootScope.userRoles = routingConfig.userRoles;
-
-        $rootScope.user = $cookieStore.get('user') || { username: '', role: routingConfig.userRoles.public };
-        $cookieStore.remove('user');
+    .run(['$rootScope', '$location', 'Auth', function ($rootScope, $location, Auth) {
 
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
             $rootScope.error = null;
-            if (!(next.access & $rootScope.user.role)) {
-                if($rootScope.user.role === routingConfig.userRoles.user || $rootScope.user.role === routingConfig.userRoles.admin) {
-                    $location.path('/');
-                }
-                else {
-                    $location.path('/login');
-                }
+            if (!Auth.authorize(next.access, $rootScope.user.role)) {
+                if(Auth.isLoggedIn($rootScope.user)) $location.path('/');
+                else                                 $location.path('/login');
             }
         });
 

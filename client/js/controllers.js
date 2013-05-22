@@ -5,12 +5,11 @@
 function AppCtrl($rootScope, $scope, $location, Auth) {
 
     $scope.getUserRoleText = function(role) {
-        return _.invert($rootScope.userRoles)[role];
+        return _.invert(Auth.userRoles)[role];
     };
 
     $scope.logout = function() {
         Auth.logout(function() {
-            $rootScope.user.role = routingConfig.userRoles.public;
             $location.path('/login');
         }, function() {
             $rootScope.error = "Failed to logout";
@@ -29,7 +28,6 @@ function LoginCtrl($rootScope, $scope, $location, Auth) {
                 rememberme: $scope.rememberme
             },
             function(res) {
-                $rootScope.user = res;
                 $location.path('/');
             },
             function(err) {

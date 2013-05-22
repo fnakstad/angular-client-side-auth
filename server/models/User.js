@@ -38,15 +38,15 @@ function addUser(username, password, role, callback) {
 };
 
 function findAll() {
-    return users;
+    return _.map(users, function(user) { return _.clone(user); });
 };
 
 function findById(id) {
-    return _.find(users, function(user) { return user.id === id });
+    return _.clone(_.find(users, function(user) { return user.id === id }));
 };
 
 function findByUsername(username) {
-    return _.find(users, function(user) { return user.username === username; });
+    return _.clone(_.find(users, function(user) { return user.username === username; }));
 };
 
 var localStrategy = new LocalStrategy(
