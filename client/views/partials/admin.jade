@@ -1,2 +1,14 @@
 h1 Admin
 p This view is only visible to administrators.
+table.table.table-striped
+    thead
+        tr
+            th #
+            th Username
+            th Role
+    tbody
+        tr(data-ng-repeat="user in users")
+            td {{ user.id }}
+            td {{ user.username }}
+            td
+                span.label(data-ng-class='{"label-info": user.role == userRoles.user, "label-success": user.role == userRoles.admin}') {{ getUserRoleText(user.role) }}

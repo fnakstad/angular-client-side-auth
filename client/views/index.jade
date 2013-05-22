@@ -25,8 +25,8 @@ head
                     | Log out
             li#userInfo(data-ng-show="showMenuItem(accessLevels.user)")
                 | Welcome&nbsp;
-                span {{ user.username }}&nbsp;
-                span.label(data-ng-class='{"label-info": user.role == userRoles.user, "label-success": user.role == userRoles.admin}') {{ getUserRoleText() }}
+                strong {{ user.username }}&nbsp;
+                span.label(data-ng-class='{"label-info": user.role == userRoles.user, "label-success": user.role == userRoles.admin}') {{ getUserRoleText(user.role) }}
 
         .container
             div(data-ng-view='ng-view')

@@ -4,8 +4,8 @@
 
 function AppCtrl($rootScope, $scope, $location, Auth) {
 
-    $scope.getUserRoleText = function() {
-        return _.invert($rootScope.userRoles)[$rootScope.user.role];
+    $scope.getUserRoleText = function(role) {
+        return _.invert($rootScope.userRoles)[role];
     };
 
     $scope.logout = function() {
@@ -72,6 +72,15 @@ function PrivateCtrl($rootScope) {
     $rootScope.activeNavItem = 'private';
 }
 
-function AdminCtrl($rootScope) {
+function AdminCtrl($rootScope, $scope, Users) {
     $rootScope.activeNavItem = 'admin';
+
+    $scope.loading = true;
+    Users.getAll(function(res) {
+        $scope.users = res;
+        $scope.loading = false;
+    }, function(err) {
+        $rootScope.error = "Failed to fetch users.";
+        $scope.loading = false;
+    });
 }
