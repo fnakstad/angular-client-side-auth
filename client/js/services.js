@@ -15,13 +15,6 @@ services.factory('Auth', function($http, $rootScope, $cookieStore){
     $rootScope.userRoles = userRoles;
 
     return {
-        init: function() {
-            $rootScope.user = $cookieStore.get('user') || { username: '', role: userRoles.public };
-            $cookieStore.remove('user');
-
-            $rootScope.accessLevels = accessLevels;
-            $rootScope.userRoles = userRoles;
-        },
         authorize: function(accessLevel, role) {
             return accessLevel & role;
         },
