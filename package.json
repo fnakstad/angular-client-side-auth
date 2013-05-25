@@ -1,18 +1,19 @@
 {
-    "name": "angular-client-side-auth",
-    "version": "0.0.1",
-    "dependencies": {
-        "express": "*",
-        "jade": "*",
-        "passport": "*",
-        "passport-local": "*",
-        "underscore": "*"
-    },
-    "subdomain": "angular-client-side-auth",
-    "scripts": {
-        "start": "server.js"
-    },
-    "engines": {
-        "node": "0.8.x"
-    }
+  "name": "angular-client-side-auth",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "*",
+    "jade": "*",
+    "passport": "*",
+    "passport-local": "*",
+    "underscore": "*",
+    "validator": "~1.1.1"
+  },
+  "subdomain": "angular-client-side-auth",
+  "scripts": {
+    "start": "server.js"
+  },
+  "engines": {
+    "node": "0.8.x"
+  }
 }

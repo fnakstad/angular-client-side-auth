@@ -3,6 +3,13 @@ var passport =  require('passport')
 
 module.exports = {
     register: function(req, res, next) {
+        try {
+            User.validate(req.body);
+        }
+        catch(err) {
+            return res.send(400, err.message);
+        }
+
         User.addUser(req.body.username, req.body.password, req.body.role, function(err, user) {
             if(err === 'UserAlreadyExists') return res.send(403, "User already exists");
             else if(err)                    return res.send(500);
