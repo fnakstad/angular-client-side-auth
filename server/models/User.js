@@ -88,8 +88,9 @@ module.exports = {
 
     deserializeUser: function(id, done) {
         var user = module.exports.findById(id);
+
         if(user)    { done(null, user); }
-        else        { done({ message: 'User not found' }, null); }
+        else        { done(null, false); }
     }
 };
 
