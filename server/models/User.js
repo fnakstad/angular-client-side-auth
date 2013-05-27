@@ -67,7 +67,7 @@ module.exports = {
     localStrategy: new LocalStrategy(
         function(username, password, done) {
 
-            var user = findByUsername(username);
+            var user = module.exports.findByUsername(username);
 
             if(!user) {
                 done(null, false, { message: 'Incorrect username.' });
