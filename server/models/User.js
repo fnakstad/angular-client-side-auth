@@ -54,8 +54,6 @@ module.exports = {
     validate: function(user) {
         check(user.username, 'Username must be 1-20 characters long').len(1, 20);
         check(user.password, 'Password must be 5-60 characters long').len(5, 60);
-        console.log(user.role);
-        console.log(_.values(userRoles));
 
         // TODO: Seems node-validator's isIn function doesn't handle Number arrays very well...
         // Till this is rectified Number arrays must be converted to string arrays
