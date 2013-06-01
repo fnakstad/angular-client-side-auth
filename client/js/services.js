@@ -14,9 +14,13 @@ angular.module('angular-client-side-auth')
 
     return {
         authorize: function(accessLevel, role) {
+            if(role === undefined)
+                role = $rootScope.user.role;
             return accessLevel & role;
         },
         isLoggedIn: function(user) {
+            if(user === undefined)
+                user = $rootScope.user;
             return user.role === userRoles.user || user.role === userRoles.admin;
         },
         register: function(user, success, error) {

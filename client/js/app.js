@@ -74,9 +74,9 @@ angular.module('angular-client-side-auth', ['ngCookies'])
 
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
             $rootScope.error = null;
-            if (!Auth.authorize(next.access, $rootScope.user.role)) {
-                if(Auth.isLoggedIn($rootScope.user)) $location.path('/');
-                else                                 $location.path('/login');
+            if (!Auth.authorize(next.access)) {
+                if(Auth.isLoggedIn()) $location.path('/');
+                else                  $location.path('/login');
             }
         });
 

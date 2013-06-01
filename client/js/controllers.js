@@ -42,15 +42,6 @@ angular.module('angular-client-side-auth')
 }]);
 
 angular.module('angular-client-side-auth')
-.controller('MenuCtrl',
-['$rootScope', '$scope', function($rootScope, $scope) {
-
-    $scope.showMenuItem = function(accessLevel) {
-        return !!($rootScope.user.role & accessLevel);
-    }
-}]);
-
-angular.module('angular-client-side-auth')
 .controller('HomeCtrl',
 ['$rootScope', function($rootScope) {
 

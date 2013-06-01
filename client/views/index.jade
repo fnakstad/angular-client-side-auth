@@ -9,21 +9,21 @@ head
 
         #cover(data-ng-hide="appInitialized", data-ng-animate="{ hide: 'fade-hide' }")
 
-        ul.nav.nav-tabs(data-ng-controller="MenuCtrl")
-            li(data-ng-show="showMenuItem(accessLevels.anon)", data-ng-class='{active: activeNavItem == "login"}')
+        ul.nav.nav-tabs
+            li(data-access-level='{{ accessLevels.anon }}', data-ng-class='{active: activeNavItem == "login"}')
                 a(href='/login') Log in
-            li(data-ng-show="showMenuItem(accessLevels.anon)", data-ng-class='{active: activeNavItem == "register"}')
+            li(data-access-level='{{ accessLevels.anon }}', data-ng-class='{active: activeNavItem == "register"}')
                 a(href='/register') Register
-            li(data-ng-show="showMenuItem(accessLevels.user)", data-ng-class='{active: activeNavItem == "home"}')
+            li(data-access-level='{{ accessLevels.user }}', data-ng-class='{active: activeNavItem == "home"}')
                 a(href='/') Home
-            li(data-ng-show="showMenuItem(accessLevels.user)", data-ng-class='{active: activeNavItem == "private"}')
+            li(data-access-level='{{ accessLevels.user }}', data-ng-class='{active: activeNavItem == "private"}')
                 a(href='/private') Private
-            li(data-ng-show="showMenuItem(accessLevels.admin)", data-ng-class='{active: activeNavItem == "admin"}')
+            li(data-access-level='{{ accessLevels.admin }}', data-ng-class='{active: activeNavItem == "admin"}')
                 a(href='/admin') Admin
-            li(data-ng-show="showMenuItem(accessLevels.user)")
+            li(data-access-level='{{ accessLevels.user }}')
                 button.btn-link.logout-button(ng-click="logout()", style="padding:8px;border:0px;")
                     | Log out
-            li#userInfo(data-ng-show="showMenuItem(accessLevels.user)")
+            li#userInfo(data-access-level='{{ accessLevels.user }}')
                 | Welcome&nbsp;
                 strong {{ user.username }}&nbsp;
                 span.label(data-ng-class='{"label-info": user.role == userRoles.user, "label-success": user.role == userRoles.admin}') {{ getUserRoleText(user.role) }}
