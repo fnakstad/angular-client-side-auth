@@ -1,9 +1,7 @@
 'use strict';
 
-/* Services */
-var services = angular.module('angular-client-side-auth.services', []);
-
-services.factory('Auth', function($http, $rootScope, $cookieStore){
+angular.module('angular-client-side-auth')
+.factory('Auth', function($http, $rootScope, $cookieStore){
 
     var accessLevels = routingConfig.accessLevels
         , userRoles = routingConfig.userRoles;
@@ -42,7 +40,8 @@ services.factory('Auth', function($http, $rootScope, $cookieStore){
     };
 });
 
-services.factory('Users', function($http) {
+angular.module('angular-client-side-auth')
+.factory('Users', function($http) {
     return {
         getAll: function(success, error) {
             $http.get('/users').success(success).error(error);
