@@ -2,7 +2,9 @@
 
 /* Controllers */
 
-function AppCtrl($rootScope, $scope, $location, Auth) {
+angular.module('angular-client-side-auth')
+.controller('AppCtrl',
+['$rootScope', '$scope', '$location', 'Auth', function($rootScope, $scope, $location, Auth) {
 
     $scope.getUserRoleText = function(role) {
         return _.invert(Auth.userRoles)[role];
@@ -15,9 +17,12 @@ function AppCtrl($rootScope, $scope, $location, Auth) {
             $rootScope.error = "Failed to logout";
         });
     };
-}
+}]);
 
-function LoginCtrl($rootScope, $scope, $location, Auth) {
+angular.module('angular-client-side-auth')
+.controller('LoginCtrl',
+['$rootScope', '$scope', '$location', 'Auth', function($rootScope, $scope, $location, Auth) {
+
     $rootScope.activeNavItem = 'login';
     $scope.rememberme = true;
 
@@ -34,19 +39,28 @@ function LoginCtrl($rootScope, $scope, $location, Auth) {
                 $rootScope.error = "Failed to login";
             });
     };
-}
+}]);
 
-function MenuCtrl($rootScope, $scope) {
+angular.module('angular-client-side-auth')
+.controller('MenuCtrl',
+['$rootScope', '$scope', function($rootScope, $scope) {
+
     $scope.showMenuItem = function(accessLevel) {
         return !!($rootScope.user.role & accessLevel);
     }
-}
+}]);
 
-function HomeCtrl($rootScope) {
+angular.module('angular-client-side-auth')
+.controller('HomeCtrl',
+['$rootScope', function($rootScope) {
+
     $rootScope.activeNavItem = 'home';
-}
 
-function RegisterCtrl($rootScope, $scope, $location, Auth) {
+}]);
+
+angular.module('angular-client-side-auth')
+.controller('RegisterCtrl',
+['$rootScope', '$scope', '$location', 'Auth', function($rootScope, $scope, $location, Auth) {
     $rootScope.activeNavItem = 'register';
     $scope.role = routingConfig.userRoles.user;
 
@@ -64,16 +78,24 @@ function RegisterCtrl($rootScope, $scope, $location, Auth) {
                 $rootScope.error = err;
             });
     };
-}
+}]);
 
-function PrivateCtrl($rootScope) {
+angular.module('angular-client-side-auth')
+.controller('PrivateCtrl',
+['$rootScope', function($rootScope) {
+
     $rootScope.activeNavItem = 'private';
-}
 
-function AdminCtrl($rootScope, $scope, Users) {
+}]);
+
+
+angular.module('angular-client-side-auth')
+.controller('AdminCtrl',
+['$rootScope', '$scope', 'Users', function($rootScope, $scope, Users) {
+
     $rootScope.activeNavItem = 'admin';
-
     $scope.loading = true;
+
     Users.getAll(function(res) {
         $scope.users = res;
         $scope.loading = false;
@@ -81,4 +103,6 @@ function AdminCtrl($rootScope, $scope, Users) {
         $rootScope.error = "Failed to fetch users.";
         $scope.loading = false;
     });
-}
+
+}]);
+

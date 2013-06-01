@@ -9,31 +9,31 @@ angular.module('angular-client-side-auth', ['angular-client-side-auth.services',
     $routeProvider.when('/',
         {
             templateUrl:    '/partials/home',
-            controller:     HomeCtrl,
+            controller:     'HomeCtrl',
             access:         access.user
         });
     $routeProvider.when('/login',
         {
             templateUrl:    '/partials/login',
-            controller:     LoginCtrl,
+            controller:     'LoginCtrl',
             access:         access.anon
         });
     $routeProvider.when('/register',
         {
             templateUrl:    '/partials/register',
-            controller:     RegisterCtrl,
+            controller:     'RegisterCtrl',
             access:         access.anon
         });
     $routeProvider.when('/private',
         {
             templateUrl:    '/partials/private',
-            controller:     PrivateCtrl,
+            controller:     'PrivateCtrl',
             access:         access.user
         });
     $routeProvider.when('/admin',
         {
             templateUrl:    '/partials/admin',
-            controller:     AdminCtrl,
+            controller:     'AdminCtrl',
             access:         access.admin
         });
     $routeProvider.when('/404',
