@@ -25,7 +25,6 @@ services.factory('Auth', function($http, $rootScope, $cookieStore){
             $http.post('/register', user).success(success).error(error);
         },
         login: function(user, success, error) {
-            console.log(user);
             $http.post('/login', user).success(function(user){
                 $rootScope.user = user;
                 success(user);
