@@ -10,15 +10,15 @@ head
         #cover(data-ng-hide="appInitialized", data-ng-animate="{ hide: 'fade-hide' }")
 
         ul.nav.nav-tabs
-            li(data-access-level='{{ accessLevels.anon }}', data-ng-class='{active: activeNavItem == "login"}')
+            li(data-access-level='{{ accessLevels.anon }}', active-nav)
                 a(href='/login') Log in
-            li(data-access-level='{{ accessLevels.anon }}', data-ng-class='{active: activeNavItem == "register"}')
+            li(data-access-level='{{ accessLevels.anon }}', active-nav)
                 a(href='/register') Register
-            li(data-access-level='{{ accessLevels.user }}', data-ng-class='{active: activeNavItem == "home"}')
+            li(data-access-level='{{ accessLevels.user }}', active-nav)
                 a(href='/') Home
-            li(data-access-level='{{ accessLevels.user }}', data-ng-class='{active: activeNavItem == "private"}')
+            li(data-access-level='{{ accessLevels.user }}', active-nav)
                 a(href='/private') Private
-            li(data-access-level='{{ accessLevels.admin }}', data-ng-class='{active: activeNavItem == "admin"}')
+            li(data-access-level='{{ accessLevels.admin }}', active-nav)
                 a(href='/admin') Admin
             li(data-access-level='{{ accessLevels.user }}')
                 button.btn-link.logout-button(ng-click="logout()", style="padding:8px;border:0px;")

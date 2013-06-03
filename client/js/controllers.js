@@ -23,9 +23,7 @@ angular.module('angular-client-side-auth')
 .controller('LoginCtrl',
 ['$rootScope', '$scope', '$location', 'Auth', function($rootScope, $scope, $location, Auth) {
 
-    $rootScope.activeNavItem = 'login';
     $scope.rememberme = true;
-
     $scope.login = function() {
         Auth.login({
                 username: $scope.username,
@@ -45,14 +43,11 @@ angular.module('angular-client-side-auth')
 .controller('HomeCtrl',
 ['$rootScope', function($rootScope) {
 
-    $rootScope.activeNavItem = 'home';
-
 }]);
 
 angular.module('angular-client-side-auth')
 .controller('RegisterCtrl',
 ['$rootScope', '$scope', '$location', 'Auth', function($rootScope, $scope, $location, Auth) {
-    $rootScope.activeNavItem = 'register';
     $scope.role = routingConfig.userRoles.user;
 
     $scope.register = function() {
@@ -74,17 +69,12 @@ angular.module('angular-client-side-auth')
 angular.module('angular-client-side-auth')
 .controller('PrivateCtrl',
 ['$rootScope', function($rootScope) {
-
-    $rootScope.activeNavItem = 'private';
-
 }]);
 
 
 angular.module('angular-client-side-auth')
 .controller('AdminCtrl',
 ['$rootScope', '$scope', 'Users', function($rootScope, $scope, Users) {
-
-    $rootScope.activeNavItem = 'admin';
     $scope.loading = true;
 
     Users.getAll(function(res) {
