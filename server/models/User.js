@@ -106,7 +106,7 @@ module.exports = {
         return new TwitterStrategy({
             consumerKey: process.env.TWITTER_CONSUMER_KEY,
             consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
-            callbackURL: 'http://localhost:8000/auth/twitter/callback'
+            callbackURL: process.env.TWITTER_CALLBACK_URL || 'http://localhost:8000/auth/twitter/callback'
         },
         function(token, tokenSecret, profile, done) {
             var user = module.exports.findByProviderToken(profile.provider, token);
