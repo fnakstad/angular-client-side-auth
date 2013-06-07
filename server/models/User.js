@@ -3,6 +3,7 @@ var User
     , passport =        require('passport')
     , LocalStrategy =   require('passport-local').Strategy
     , TwitterStrategy = require('passport-twitter').Strategy
+    , FacebookStrategy = require('passport-facebook').Strategy
     , check =           require('validator').check
     , userRoles =       require('../../client/js/routingConfig').userRoles;
 
@@ -65,8 +66,8 @@ module.exports = {
         return _.clone(_.find(users, function(user) { return user.username === username; }));
     },
 
-    findByProviderToken: function(provider, token) {
-        return _.find(users, function(user) { return user[provider] === token; });
+    findByProviderId: function(provider, id) {
+        return _.find(users, function(user) { return user[provider] === id; });
     },
 
     validate: function(user) {
@@ -109,9 +110,27 @@ module.exports = {
             callbackURL: process.env.TWITTER_CALLBACK_URL || 'http://localhost:8000/auth/twitter/callback'
         },
         function(token, tokenSecret, profile, done) {
-            var user = module.exports.findByProviderToken(profile.provider, token);
+            var user = module.exports.findByProviderId(profile.provider, profile.id);
             if(!user) {
-                user = module.exports.addOauthUser(profile.provider, token);
+                user = module.exports.addOauthUser(profile.provider, profile.id);
+            }
+            done(null, user);
+        });
+    },
+
+    facebookStrategy: function() {
+        if(!process.env.FACEBOOK_APP_ID)     throw new Error('A Facebook App ID is required if you want to enable login via Facebook.');
+        if(!process.env.FACEBOOK_APP_SECRET) throw new Error('A Facebook App Secret is required if you want to enable login via Facebook.');
+
+        return new FacebookStrategy({
+            clientID: process.env.FACEBOOK_APP_ID,
+            clientSecret: process.env.FACEBOOK_APP_SECRET,
+            callbackURL: process.env.FACEBOOK_CALLBACK_URL || "http://localhost:8000/auth/facebook/callback"
+        },
+        function(accessToken, refreshToken, profile, done) {
+            var user = module.exports.findByProviderId(profile.provider, profile.id);
+            if(!user) {
+                user = module.exports.addOauthUser(profile.provider, profile.id);
             }
             done(null, user);
         });

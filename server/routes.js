@@ -37,6 +37,21 @@ var routes = [
         accessLevel: accessLevels.public
     },
     {
+        path: '/auth/facebook',
+        httpMethod: 'GET',
+        middleware: [passport.authenticate('facebook')],
+        accessLevel: accessLevels.public
+    },
+    {
+        path: '/auth/facebook/callback',
+        httpMethod: 'GET',
+        middleware: [function(req,res,next) { console.log('yep'); next(); }, passport.authenticate('facebook', {
+            successRedirect: '/',
+            failureRedirect: '/login'
+        })],
+        accessLevel: accessLevels.public
+    },
+    {
         path: '/register',
         httpMethod: 'POST',
         middleware: [AuthCtrl.register],

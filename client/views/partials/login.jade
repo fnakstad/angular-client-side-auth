@@ -27,6 +27,10 @@
                 button.btn(type="submit") Log in
     hr
     h5 ... or use one of them fancy social logins:
-    a.btn(href="", ng-click="loginTwitter()")
-        i.icon-twitter
-        |  Twitter
+    .btn-group
+        a.btn(href="", ng-click="loginOauth('facebook')")
+            i.icon-facebook-sign
+            |  Facebook
+        a.btn(href="", ng-click="loginOauth('twitter')")
+            i.icon-twitter
+            |  Twitter

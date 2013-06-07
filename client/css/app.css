@@ -2,6 +2,10 @@
     display: none;
 }
 
+body {
+    font-size: 1em;
+}
+
 #cover {
     position:absolute;
     height:100%;
@@ -15,6 +19,10 @@
 
 .icon-twitter {
     color:#00A7E7;
+}
+
+.icon-facebook-sign {
+    color:#3662A0;
 }
 
 .fade-hide-setup, .fade-show-setup {
