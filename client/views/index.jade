@@ -6,6 +6,10 @@ html(lang='en', data-ng-app='angular-client-side-auth')
         link(rel='stylesheet', href='css/app.css')
         link(href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css", rel="stylesheet")
         link(href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.min.css", rel="stylesheet")
+        script(type="text/javascript")
+            if (window.location.href.indexOf('#_=_') > 0) {
+                window.location = window.location.href.replace(/#.*/, '');
+            }
     body(data-ng-controller="AppCtrl", ng-cloak)
 
         #cover(data-ng-hide="appInitialized", data-ng-animate="{ hide: 'fade-hide' }")

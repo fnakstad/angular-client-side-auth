@@ -3,6 +3,7 @@ var User
     , passport =        require('passport')
     , LocalStrategy =   require('passport-local').Strategy
     , TwitterStrategy = require('passport-twitter').Strategy
+    , FacebookStrategy = require('passport-facebook').Strategy
     , check =           require('validator').check
     , userRoles =       require('../../client/js/routingConfig').userRoles;
 
@@ -112,6 +113,24 @@ module.exports = {
             var user = module.exports.findByProviderToken(profile.provider, token);
             if(!user) {
                 user = module.exports.addOauthUser(profile.provider, token);
+            }
+            done(null, user);
+        });
+    },
+
+    facebookStrategy: function() {
+        if(!process.env.FACEBOOK_APP_ID)     throw new Error('A Facebook App ID is required if you want to enable login via Facebook.');
+        if(!process.env.FACEBOOK_APP_SECRET) throw new Error('A Facebook App Secret is required if you want to enable login via Facebook.');
+
+        return new FacebookStrategy({
+            clientID: process.env.FACEBOOK_APP_ID,
+            clientSecret: process.env.FACEBOOK_APP_SECRET,
+            callbackURL: process.env.FACEBOOK_CALLBACK_URL || "http://localhost:8000/auth/facebook/callback"
+        },
+        function(accessToken, refreshToken, profile, done) {
+            var user = module.exports.findByProviderToken(profile.provider, profile.id);
+            if(!user) {
+                user = module.exports.addOauthUser(profile.provider, profile.id);
             }
             done(null, user);
         });

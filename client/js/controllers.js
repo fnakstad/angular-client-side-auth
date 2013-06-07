@@ -38,8 +38,8 @@ angular.module('angular-client-side-auth')
             });
     };
 
-    $scope.loginTwitter = function() {
-        $window.location.href = '/auth/twitter';
+    $scope.loginOauth = function(provider) {
+        $window.location.href = '/auth/' + provider;
     };
 }]);
 
