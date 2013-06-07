@@ -42,15 +42,18 @@ module.exports = {
         callback(null, user);
     },
 
-    addOauthUser: function(provider, token) {
-        var user = {
-            id: _.max(users, function(user) { return user.id; }).id + 1,
-            username: provider + '_user', // Should keep Oauth users anonymous on demo site
-            role: userRoles.user,
-            provider: provider
-        };
-        user[provider] = token;
-        users.push(user);
+    findOrCreateOauthUser: function(provider, providerId) {
+        var user = module.exports.findByProviderId(provider, providerId);
+        if(!user) {
+            user = {
+                id: _.max(users, function(user) { return user.id; }).id + 1,
+                username: provider + '_user', // Should keep Oauth users anonymous on demo site
+                role: userRoles.user,
+                provider: provider
+            };
+            user[provider] = providerId;
+            users.push(user);
+        }
 
         return user;
     },
@@ -111,10 +114,7 @@ module.exports = {
             callbackURL: process.env.TWITTER_CALLBACK_URL || 'http://localhost:8000/auth/twitter/callback'
         },
         function(token, tokenSecret, profile, done) {
-            var user = module.exports.findByProviderId(profile.provider, profile.id);
-            if(!user) {
-                user = module.exports.addOauthUser(profile.provider, profile.id);
-            }
+            var user = module.exports.findOrCreateOauthUser(profile.provider, profile.id);
             done(null, user);
         });
     },
@@ -129,10 +129,7 @@ module.exports = {
             callbackURL: process.env.FACEBOOK_CALLBACK_URL || "http://localhost:8000/auth/facebook/callback"
         },
         function(accessToken, refreshToken, profile, done) {
-            var user = module.exports.findByProviderId(profile.provider, profile.id);
-            if(!user) {
-                user = module.exports.addOauthUser(profile.provider, profile.id);
-            }
+            var user = module.exports.findOrCreateOauthUser(profile.provider, profile.id);
             done(null, user);
         });
     },
@@ -144,10 +141,7 @@ module.exports = {
             realm: process.env.GOOGLE_REALM || "http://localhost:8000/"
         },
         function(identifier, profile, done) {
-            var user = module.exports.findByProviderId('google', identifier);
-            if(!user) {
-                user = module.exports.addOauthUser('google', identifier);
-            }
+            var user = module.exports.findOrCreateOauthUser('google', identifier);
             done(null, user);
         });
     },
@@ -163,4 +157,3 @@ module.exports = {
         else        { done(null, false); }
     }
 };
-
