@@ -7,7 +7,9 @@
     "passport": "*",
     "passport-local": "*",
     "underscore": "*",
-    "validator": "~1.1.1"
+    "validator": "~1.1.1",
+    "passport-twitter": "~0.1.4",
+    "passport-facebook": "~0.1.5"
   },
   "subdomain": "angular-client-side-auth",
   "scripts": {
@@ -15,8 +17,5 @@
   },
   "engines": {
     "node": "0.8.x"
-  },
-  "devDependencies": {
-    "passport-twitter": "~0.1.4"
   }
 }
