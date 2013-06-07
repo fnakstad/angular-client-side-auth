@@ -24,6 +24,12 @@ angular.module('angular-client-side-auth', ['ngCookies'])
             controller:     'RegisterCtrl',
             access:         access.anon
         });
+    $routeProvider.when('/auth/twitter',
+        {
+            templateUrl:    '/partials/register',
+            controller:     'RegisterCtrl',
+            access:         access.anon
+        });
     $routeProvider.when('/private',
         {
             templateUrl:    '/partials/private',

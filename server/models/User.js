@@ -2,6 +2,7 @@ var User
     , _ =               require('underscore')
     , passport =        require('passport')
     , LocalStrategy =   require('passport-local').Strategy
+    , TwitterStrategy = require('passport-twitter').Strategy
     , check =           require('validator').check
     , userRoles =       require('../../client/js/routingConfig').userRoles;
 
@@ -39,6 +40,19 @@ module.exports = {
         callback(null, user);
     },
 
+    addOauthUser: function(provider, token) {
+        var user = {
+            id: _.max(users, function(user) { return user.id; }).id + 1,
+            username: provider + '_user', // Should keep Oauth users anonymous on demo site
+            role: userRoles.user,
+            provider: provider
+        };
+        user[provider] = token;
+        users.push(user);
+
+        return user;
+    },
+
     findAll: function() {
         return _.map(users, function(user) { return _.clone(user); });
     },
@@ -49,6 +63,10 @@ module.exports = {
 
     findByUsername: function(username) {
         return _.clone(_.find(users, function(user) { return user.username === username; }));
+    },
+
+    findByProviderToken: function(provider, token) {
+        return _.find(users, function(user) { return user[provider] === token; });
     },
 
     validate: function(user) {
@@ -80,6 +98,24 @@ module.exports = {
 
         }
     ),
+
+    twitterStrategy: function() {
+        if(!process.env.TWITTER_CONSUMER_KEY)    throw new Error('A Twitter Consumer Key is required if you want to enable login via Twitter.');
+        if(!process.env.TWITTER_CONSUMER_SECRET) throw new Error('A Twitter Consumer Secret is required if you want to enable login via Twitter.');
+
+        return new TwitterStrategy({
+            consumerKey: process.env.TWITTER_CONSUMER_KEY,
+            consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
+            callbackURL: process.env.TWITTER_CALLBACK_URL || 'http://localhost:8000/auth/twitter/callback'
+        },
+        function(token, tokenSecret, profile, done) {
+            var user = module.exports.findByProviderToken(profile.provider, token);
+            if(!user) {
+                user = module.exports.addOauthUser(profile.provider, token);
+            }
+            done(null, user);
+        });
+    },
 
     serializeUser: function(user, done) {
         done(null, user.id);

@@ -21,7 +21,7 @@ angular.module('angular-client-side-auth')
 
 angular.module('angular-client-side-auth')
 .controller('LoginCtrl',
-['$rootScope', '$scope', '$location', 'Auth', function($rootScope, $scope, $location, Auth) {
+['$rootScope', '$scope', '$location', '$window', 'Auth', function($rootScope, $scope, $location, $window, Auth) {
 
     $scope.rememberme = true;
     $scope.login = function() {
@@ -36,6 +36,10 @@ angular.module('angular-client-side-auth')
             function(err) {
                 $rootScope.error = "Failed to login";
             });
+    };
+
+    $scope.loginTwitter = function() {
+        $window.location.href = '/auth/twitter';
     };
 }]);
 
