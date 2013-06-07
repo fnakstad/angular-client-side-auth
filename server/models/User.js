@@ -86,25 +86,30 @@ module.exports = {
         }
     ),
 
-    twitterStrategy: new TwitterStrategy({
-        consumerKey: process.env.TWITTER_CONSUMER_KEY,
-        consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
-        callbackURL: 'http://localhost:8000/auth/twitter/callback'
+    twitterStrategy: function() {
+        if(!process.env.TWITTER_CONSUMER_KEY)    throw new Error('A Twitter Consumer Key is required if you want to enable login via Twitter.');
+        if(!process.env.TWITTER_CONSUMER_SECRET) throw new Error('A Twitter Consumer Secret is required if you want to enable login via Twitter.');
+
+        return new TwitterStrategy({
+            consumerKey: process.env.TWITTER_CONSUMER_KEY,
+            consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
+            callbackURL: 'http://localhost:8000/auth/twitter/callback'
+        },
+        function(token, tokenSecret, profile, done) {
+            var user = module.exports.findByProviderToken(profile.provider, token);
+            if(!user) {
+                user = {
+                    id: _.max(users, function(user) { return user.id; }).id + 1,
+                    username: ' twitter_user', // Should keep users anonymous on demo site
+                    role: userRoles.user,
+                    provider: 'twitter'
+                };
+                user[profile.provider] = token;
+                users.push(user);
+            }
+            done(null, user);
+        });
     },
-    function(token, tokenSecret, profile, done) {
-        var user = module.exports.findByProviderToken(profile.provider, token);
-        if(!user) {
-            user = {
-                id: _.max(users, function(user) { return user.id; }).id + 1,
-                username: ' twitter_user',
-                role: userRoles.user,
-                provider: 'twitter'
-            };
-            user[profile.provider] = token;
-            users.push(user);
-        }
-        done(null, user);
-    }),
 
     serializeUser: function(user, done) {
         done(null, user.id);
