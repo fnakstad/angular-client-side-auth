@@ -40,6 +40,19 @@ module.exports = {
         callback(null, user);
     },
 
+    addOauthUser: function(provider, token) {
+        var user = {
+            id: _.max(users, function(user) { return user.id; }).id + 1,
+            username: provider + '_user', // Should keep Oauth users anonymous on demo site
+            role: userRoles.user,
+            provider: provider
+        };
+        user[provider] = token;
+        users.push(user);
+
+        return user;
+    },
+
     findAll: function() {
         return _.map(users, function(user) { return _.clone(user); });
     },
@@ -98,14 +111,7 @@ module.exports = {
         function(token, tokenSecret, profile, done) {
             var user = module.exports.findByProviderToken(profile.provider, token);
             if(!user) {
-                user = {
-                    id: _.max(users, function(user) { return user.id; }).id + 1,
-                    username: ' twitter_user', // Should keep users anonymous on demo site
-                    role: userRoles.user,
-                    provider: 'twitter'
-                };
-                user[profile.provider] = token;
-                users.push(user);
+                user = module.exports.addOauthUser(profile.provider, token);
             }
             done(null, user);
         });
