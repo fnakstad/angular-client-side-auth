@@ -25,7 +25,7 @@ head
                         li(data-access-level='{{ accessLevels.admin }}', active-nav)
                             a(href='/admin') Admin
                         li(data-access-level='{{ accessLevels.user }}')
-                            a(href="#", ng-click="logout()")
+                            a(href="", ng-click="logout()")
                                 | Log out
                     div#userInfo.pull-right(data-access-level='{{ accessLevels.user }}')
                         | Welcome&nbsp;

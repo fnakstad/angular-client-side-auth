@@ -22,6 +22,21 @@ var routes = [
 
     // Auth stuff
     {
+        path: '/auth/twitter',
+        httpMethod: 'GET',
+        middleware: [passport.authenticate('twitter')],
+        accessLevel: accessLevels.public
+    },
+    {
+        path: '/auth/twitter/callback',
+        httpMethod: 'GET',
+        middleware: [passport.authenticate('twitter', {
+            successRedirect: '/',
+            failureRedirect: '/login'
+        })],
+        accessLevel: accessLevels.public
+    },
+    {
         path: '/register',
         httpMethod: 'POST',
         middleware: [AuthCtrl.register],

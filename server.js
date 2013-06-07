@@ -21,6 +21,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.use(User.localStrategy);
+passport.use(User.twitterStrategy);
 passport.serializeUser(User.serializeUser);
 passport.deserializeUser(User.deserializeUser);
 

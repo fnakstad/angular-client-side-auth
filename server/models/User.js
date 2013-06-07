@@ -2,6 +2,7 @@ var User
     , _ =               require('underscore')
     , passport =        require('passport')
     , LocalStrategy =   require('passport-local').Strategy
+    , TwitterStrategy = require('passport-twitter').Strategy
     , check =           require('validator').check
     , userRoles =       require('../../client/js/routingConfig').userRoles;
 
@@ -51,6 +52,10 @@ module.exports = {
         return _.clone(_.find(users, function(user) { return user.username === username; }));
     },
 
+    findByProviderToken: function(provider, token) {
+        return _.find(users, function(user) { return user[provider] === token; });
+    },
+
     validate: function(user) {
         check(user.username, 'Username must be 1-20 characters long').len(1, 20);
         check(user.password, 'Password must be 5-60 characters long').len(5, 60);
@@ -80,6 +85,26 @@ module.exports = {
 
         }
     ),
+
+    twitterStrategy: new TwitterStrategy({
+        consumerKey: process.env.TWITTER_CONSUMER_KEY,
+        consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
+        callbackURL: 'http://localhost:8000/auth/twitter/callback'
+    },
+    function(token, tokenSecret, profile, done) {
+        var user = module.exports.findByProviderToken(profile.provider, token);
+        if(!user) {
+            user = {
+                id: _.max(users, function(user) { return user.id; }).id + 1,
+                username: ' twitter_user',
+                role: userRoles.user,
+                provider: 'twitter'
+            };
+            user[profile.provider] = token;
+            users.push(user);
+        }
+        done(null, user);
+    }),
 
     serializeUser: function(user, done) {
         done(null, user.id);
