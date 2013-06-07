@@ -12,7 +12,7 @@ html(lang='en', data-ng-app='angular-client-side-auth')
             if (window.location.href.indexOf('#_=_') > 0) {
                 window.location = window.location.href.replace(/#.*/, '');
             }
-    body(data-ng-controller="AppCtrl", ng-cloak)
+    body(data-ng-controller="AppCtrl", data-ng-cloak)
 
         #cover(data-ng-hide="appInitialized", data-ng-animate="{ hide: 'fade-hide' }")
 
@@ -31,7 +31,7 @@ html(lang='en', data-ng-app='angular-client-side-auth')
                         li(data-access-level='{{ accessLevels.admin }}', active-nav)
                             a(href='/admin') Admin
                         li(data-access-level='{{ accessLevels.user }}')
-                            a(href="", ng-click="logout()")
+                            a(href="", data-ng-click="logout()")
                                 | Log out
                     div#userInfo.pull-right(data-access-level='{{ accessLevels.user }}')
                         | Welcome&nbsp;

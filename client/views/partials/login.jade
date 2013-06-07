@@ -12,15 +12,15 @@
         .control-group
             label.control-label(for="username") Username
             .controls
-                input(type="text", ng-model="username", placeholder="Username", name="username", required)
+                input(type="text", data-ng-model="username", placeholder="Username", name="username", required)
         .control-group
             label.control-label(for="password") Password
             .controls
-                input(type="password", ng-model="password", placeholder="Password", name="password", required)
+                input(type="password", data-ng-model="password", placeholder="Password", name="password", required)
         .control-group
             .controls
                 label(for="rememberme").checkbox
-                    input(type="checkbox", ng-model="rememberme", name="rememberme")
+                    input(type="checkbox", data-ng-model="rememberme", name="rememberme")
                     | Remember me
         .control-group
             .controls
@@ -28,12 +28,12 @@
     hr
     h5 ... or use one of them fancy social logins:
     .btn-group
-        a.btn(href="", ng-click="loginOauth('facebook')")
+        a.btn(href="", data-ng-click="loginOauth('facebook')")
             i.icon-facebook-sign
             |  Facebook
-        a.btn(href="", ng-click="loginOauth('twitter')")
+        a.btn(href="", data-ng-click="loginOauth('twitter')")
             i.icon-twitter
             |  Twitter
-        a.btn(href="", ng-click="loginOauth('google')")
+        a.btn(href="", data-ng-click="loginOauth('google')")
             i.icon-google-plus-sign
             |  Google
