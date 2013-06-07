@@ -4,6 +4,7 @@ var User
     , LocalStrategy =   require('passport-local').Strategy
     , TwitterStrategy = require('passport-twitter').Strategy
     , FacebookStrategy = require('passport-facebook').Strategy
+    , GoogleStrategy = require('passport-google').Strategy
     , check =           require('validator').check
     , userRoles =       require('../../client/js/routingConfig').userRoles;
 
@@ -131,6 +132,21 @@ module.exports = {
             var user = module.exports.findByProviderId(profile.provider, profile.id);
             if(!user) {
                 user = module.exports.addOauthUser(profile.provider, profile.id);
+            }
+            done(null, user);
+        });
+    },
+
+    googleStrategy: function() {
+
+        return new GoogleStrategy({
+            returnURL: process.env.GOOGLE_RETURN_URL || "http://localhost:8000/auth/google/return",
+            realm: process.env.GOOGLE_REALM || "http://localhost:8000/"
+        },
+        function(identifier, profile, done) {
+            var user = module.exports.findByProviderId('google', identifier);
+            if(!user) {
+                user = module.exports.addOauthUser('google', identifier);
             }
             done(null, user);
         });
