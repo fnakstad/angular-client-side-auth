@@ -10,24 +10,27 @@ html(lang='en', data-ng-app='angular-client-side-auth')
 
         #cover(data-ng-hide="appInitialized", data-ng-animate="{ hide: 'fade-hide' }")
 
-        ul.nav.nav-tabs
-            li(data-access-level='{{ accessLevels.anon }}', active-nav)
-                a(href='/login') Log in
-            li(data-access-level='{{ accessLevels.anon }}', active-nav)
-                a(href='/register') Register
-            li(data-access-level='{{ accessLevels.user }}', active-nav)
-                a(href='/') Home
-            li(data-access-level='{{ accessLevels.user }}', active-nav)
-                a(href='/private') Private
-            li(data-access-level='{{ accessLevels.admin }}', active-nav)
-                a(href='/admin') Admin
-            li(data-access-level='{{ accessLevels.user }}')
-                button.btn-link.logout-button(ng-click="logout()", style="padding:8px;border:0px;")
-                    | Log out
-            li#userInfo(data-access-level='{{ accessLevels.user }}')
-                | Welcome&nbsp;
-                strong {{ user.username }}&nbsp;
-                span.label(data-ng-class='{"label-info": user.role == userRoles.user, "label-success": user.role == userRoles.admin}') {{ getUserRoleText(user.role) }}
+        .navbar
+            .navbar-inner
+                .container-fluid
+                    ul.nav
+                        li(data-access-level='{{ accessLevels.anon }}', active-nav)
+                            a(href='/login') Log in
+                        li(data-access-level='{{ accessLevels.anon }}', active-nav)
+                            a(href='/register') Register
+                        li(data-access-level='{{ accessLevels.user }}', active-nav)
+                            a(href='/') Home
+                        li(data-access-level='{{ accessLevels.user }}', active-nav)
+                            a(href='/private') Private
+                        li(data-access-level='{{ accessLevels.admin }}', active-nav)
+                            a(href='/admin') Admin
+                        li(data-access-level='{{ accessLevels.user }}')
+                            a(href="", ng-click="logout()")
+                                | Log out
+                    div#userInfo.pull-right(data-access-level='{{ accessLevels.user }}')
+                        | Welcome&nbsp;
+                        strong {{ user.username }}&nbsp;
+                        span.label(data-ng-class='{"label-info": user.role == userRoles.user, "label-success": user.role == userRoles.admin}') {{ getUserRoleText(user.role) }}
 
         .container
             div(data-ng-view='ng-view')
