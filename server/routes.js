@@ -20,7 +20,7 @@ var routes = [
         accessLevel: accessLevels.public
     },
 
-    // Auth stuff
+    // OAUTH
     {
         path: '/auth/twitter',
         httpMethod: 'GET',
@@ -45,12 +45,29 @@ var routes = [
     {
         path: '/auth/facebook/callback',
         httpMethod: 'GET',
-        middleware: [function(req,res,next) { console.log('yep'); next(); }, passport.authenticate('facebook', {
+        middleware: [passport.authenticate('facebook', {
             successRedirect: '/',
             failureRedirect: '/login'
         })],
         accessLevel: accessLevels.public
     },
+    {
+        path: '/auth/google',
+        httpMethod: 'GET',
+        middleware: [passport.authenticate('google')],
+        accessLevel: accessLevels.public
+    },
+    {
+        path: '/auth/google/return',
+        httpMethod: 'GET',
+        middleware: [passport.authenticate('google', {
+            successRedirect: '/',
+            failureRedirect: '/login'
+        })],
+        accessLevel: accessLevels.public
+    },
+
+    // Local Auth
     {
         path: '/register',
         httpMethod: 'POST',
