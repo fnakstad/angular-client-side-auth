@@ -8,6 +8,8 @@ module.exports = {
         _.each(users, function(user) {
             delete user.password;
             delete user.twitter;
+            delete user.facebook;
+            delete user.google;
         });
         res.json(users);
     }

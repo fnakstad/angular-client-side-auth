@@ -4,10 +4,10 @@
         a(href="http://www.frederiknakstad.com/authentication-in-single-page-applications-with-angular-js/")  this blogpost
         | . All the code can be found in
         a(href="https://github.com/fnakstad/angular-client-side-auth")  this GitHub repository
-        | . You can either register a new user, or log in with one of the two predefined users:
-        ul
-            li admin/123
-            li user/123
+        | . You can either register a new user, log in with one of the two predefined users...
+    ul
+        li admin/123
+        li user/123
     form.form-horizontal(ng-submit="login()", name="loginForm")
         .control-group
             label.control-label(for="username") Username
@@ -26,7 +26,7 @@
             .controls
                 button.btn(type="submit") Log in
     hr
-    h5 ... or use one of them fancy social logins:
+    p ... or use one of them fancy social logins:
     .btn-group
         a.btn(href="", data-ng-click="loginOauth('facebook')")
             i.icon-facebook-sign
