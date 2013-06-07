@@ -66,8 +66,8 @@ module.exports = {
         return _.clone(_.find(users, function(user) { return user.username === username; }));
     },
 
-    findByProviderToken: function(provider, token) {
-        return _.find(users, function(user) { return user[provider] === token; });
+    findByProviderId: function(provider, id) {
+        return _.find(users, function(user) { return user[provider] === id; });
     },
 
     validate: function(user) {
@@ -110,9 +110,9 @@ module.exports = {
             callbackURL: process.env.TWITTER_CALLBACK_URL || 'http://localhost:8000/auth/twitter/callback'
         },
         function(token, tokenSecret, profile, done) {
-            var user = module.exports.findByProviderToken(profile.provider, token);
+            var user = module.exports.findByProviderId(profile.provider, profile.id);
             if(!user) {
-                user = module.exports.addOauthUser(profile.provider, token);
+                user = module.exports.addOauthUser(profile.provider, profile.id);
             }
             done(null, user);
         });
@@ -128,7 +128,7 @@ module.exports = {
             callbackURL: process.env.FACEBOOK_CALLBACK_URL || "http://localhost:8000/auth/facebook/callback"
         },
         function(accessToken, refreshToken, profile, done) {
-            var user = module.exports.findByProviderToken(profile.provider, profile.id);
+            var user = module.exports.findByProviderId(profile.provider, profile.id);
             if(!user) {
                 user = module.exports.addOauthUser(profile.provider, profile.id);
             }
