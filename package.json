@@ -25,6 +25,6 @@
         "mocha": "~1.10.0"
     },
     "scripts": {
-        "test": "mocha server/tests"
+        "test": "mocha server/tests --recursive"
     }
 }
