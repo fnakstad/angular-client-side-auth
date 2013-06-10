@@ -21,17 +21,6 @@ module.exports = {
         });
     },
 
-    twitterLogin: function() {
-        passport.authenticate('twitter');
-    },
-
-    twitterCallback: function() {
-        passport.authenticate('twitter', {
-            successRedirect: '/',
-            failureRedirect: '/login'
-        });
-    },
-
     login: function(req, res, next) {
         passport.authenticate('local', function(err, user) {
 
