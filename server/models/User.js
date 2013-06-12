@@ -5,6 +5,7 @@ var User
     , TwitterStrategy = require('passport-twitter').Strategy
     , FacebookStrategy = require('passport-facebook').Strategy
     , GoogleStrategy = require('passport-google').Strategy
+    , LinkedInStrategy = require('passport-linkedin').Strategy
     , check =           require('validator').check
     , userRoles =       require('../../client/js/routingConfig').userRoles;
 
@@ -146,6 +147,21 @@ module.exports = {
         });
     },
 
+    linkedInStrategy: function() {
+        if(!process.env.LINKED_IN_KEY)     throw new Error('A LinkedIn App Key is required if you want to enable login via Facebook.');
+        if(!process.env.LINKED_IN_SECRET) throw new Error('A LinkedIn App Secret is required if you want to enable login via Facebook.');
+
+        return new LinkedInStrategy({
+            consumerKey: process.env.LINKED_IN_KEY,,
+            consumerSecret: process.env.LINKED_IN_SECRET,
+            callbackURL: "http://localhost:8000/auth/linkedin/callback"
+          },
+           function(token, tokenSecret, profile, done) {
+            var user = module.exports.findOrCreateOauthUser('linkedin',profile.id);
+            done(null,user); 
+          }
+        );
+    },
     serializeUser: function(user, done) {
         done(null, user.id);
     },

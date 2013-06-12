@@ -66,6 +66,21 @@ var routes = [
         })],
         accessLevel: accessLevels.public
     },
+    {
+        path: '/auth/linkedin',
+        httpMethod: 'GET',
+        middleware: [passport.authenticate('linkedin')],
+        accessLevel: accessLevels.public
+    },
+    {
+        path: '/auth/linkedin/callback',
+        httpMethod: 'GET',
+        middleware: [passport.authenticate('linkedin', {
+            successRedirect: '/',
+            failureRedirect: '/login'
+        })],
+        accessLevel: accessLevels.public
+    },
 
     // Local Auth
     {
