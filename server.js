@@ -15,7 +15,7 @@ app.use(express.methodOverride());
 app.use(express.static(path.join(__dirname, 'client')));
 app.use(express.cookieSession(
     {
-        secret: "Superdupersecret"
+        secret: process.env.COOKIE_SECRET || "Superdupersecret"
     }));
 app.use(passport.initialize());
 app.use(passport.session());
