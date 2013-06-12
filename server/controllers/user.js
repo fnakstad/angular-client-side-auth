@@ -10,6 +10,7 @@ module.exports = {
             delete user.twitter;
             delete user.facebook;
             delete user.google;
+            delete user.linkedin;
         });
         res.json(users);
     }
