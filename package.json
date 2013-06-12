@@ -11,6 +11,7 @@
     "passport-twitter": "~0.1.4",
     "passport-facebook": "~0.1.5",
     "passport-google": "~0.3.0"
+    "passport-linkedin": "~0.1.3"
   },
   "subdomain": "angular-client-side-auth",
   "scripts": {
