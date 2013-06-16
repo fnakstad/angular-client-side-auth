@@ -1,16 +1,18 @@
 (function(exports){
 
-    exports.userRoles = {
+    var userRoles = {
         public: 1, // 001
         user:   2, // 010
         admin:  4  // 100
     };
 
+    exports.userRoles = userRoles;
+
     exports.accessLevels = {
-        public: 7, // 111
-        anon:   1, // 001
-        user:   6, // 110
-        admin:  4  // 100
+        public: userRoles.public | userRoles.user | userRoles.admin,
+        anon:   userRoles.public,
+        user:   userRoles.user | userRoles.admin,
+        admin:  userRoles.admin
     };
 
 })(typeof exports === 'undefined'? this['routingConfig']={}: exports);
