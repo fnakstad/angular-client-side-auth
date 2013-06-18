@@ -64,7 +64,8 @@
                     exports.accessLevels[level] = parseInt(resultBitMask,2);
 
                 }else{
-                    }
+                    console.log("Access Control Error: Could not parse '"+config.accessLevels[level]+"' as access definition for level '"+level+"'")
+                }
 
             }else{
 
@@ -75,7 +76,8 @@
                         resultBitCode = resultBitCode | exports.userRoles[config.accessLevels[level][role]]
 
                     }else{
-                        }
+                        console.log("Access Control Error: Could not find role '"+config.accessLevels[level][role]+"' in registered roles while building access for '"+level+"'")
+                    }
                 }
                 exports.accessLevels[level] = resultBitCode;
             }
