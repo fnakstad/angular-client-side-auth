@@ -11,10 +11,10 @@ table.table.table-striped(data-ng-hide="loading")
         tr(data-ng-repeat="user in users")
             td {{ user.id }}
             td
-               i.icon-twitter(data-ng-show="user.provider === 'twitter'")
-               i.icon-facebook-sign(data-ng-show="user.provider === 'facebook'")
-               i.icon-google-plus-sign(data-ng-show="user.provider === 'google'")
-               i.icon-linkedin(data-ng-show="user.provider === 'linkedin'")
+               i.icon-twitter(data-ng-show="user.provider == 'twitter'")
+               i.icon-facebook-sign(data-ng-show="user.provider == 'facebook'")
+               i.icon-google-plus-sign(data-ng-show="user.provider == 'google'")
+               i.icon-linkedin(data-ng-show="user.provider == 'linkedin'")
                |  {{ user.username }}
             td
                 span.label(data-ng-class='{"label-info": user.role == userRoles.user, "label-success": user.role == userRoles.admin}') {{ getUserRoleText(user.role) }}
