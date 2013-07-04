@@ -12,10 +12,6 @@ angular.module('angular-client-side-auth')
 
     $scope.user = Auth.user;
 
-    $rootScope.$on('userChanged', function(e, user) {
-        $scope.user = user;
-    });
-
     $scope.logout = function() {
         Auth.logout(function() {
             $location.path('/login');

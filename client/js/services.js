@@ -5,17 +5,15 @@ angular.module('angular-client-side-auth')
 
     var accessLevels = routingConfig.accessLevels
         , userRoles = routingConfig.userRoles
-        , currentUser;
+        , currentUser = $cookieStore.get('user') || { username: '', role: userRoles.public };
 
-    changeUser($cookieStore.get('user') || { username: '', role: userRoles.public });
     $cookieStore.remove('user');
 
     $rootScope.accessLevels = accessLevels;
     $rootScope.userRoles = userRoles;
 
     function changeUser(user) {
-        currentUser = user;
-        $rootScope.$broadcast('userChanged', currentUser);
+        _.extend(currentUser, user);
     };
 
     return {

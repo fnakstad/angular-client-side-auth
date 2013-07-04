@@ -1,29 +1,25 @@
 'use strict';
 
 angular.module('angular-client-side-auth')
-.directive('accessLevel', ['$rootScope', 'Auth', function($rootScope, Auth) {
+.directive('accessLevel', ['Auth', function(Auth) {
     return {
         restrict: 'A',
-        link: function(scope, element, attrs) {
+        link: function($scope, element, attrs) {
             var prevDisp = element.css('display')
                 , userRole
                 , accessLevel;
 
-            $rootScope.$on('userChanged', function(e, user) {
+            $scope.user = Auth.user;
+            $scope.$watch('user', function(user) {
                 if(user.role)
                     userRole = user.role;
                 updateCSS();
-            });
+            }, true);
 
             attrs.$observe('accessLevel', function(al) {
                 if(al) accessLevel = al;
                 updateCSS();
             });
-
-            // Initialize userRole
-            if(Auth.user && Auth.user.role)
-                userRole = Auth.user.role;
-            updateCSS();
 
             function updateCSS() {
                 if(userRole && accessLevel) {
