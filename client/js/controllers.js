@@ -3,16 +3,10 @@
 /* Controllers */
 
 angular.module('angular-client-side-auth')
-.controller('AppCtrl',
-['$rootScope', '$scope', '$location', 'Auth', function($rootScope, $scope, $location, Auth) {
-
-    $scope.getUserRoleText = function(role) {
-        return _.invert(Auth.userRoles)[role];
-    };
-
-    $scope.user =         Auth.user;
+.controller('NavCtrl', ['$scope', '$location', 'Auth', function($scope, $location, Auth) {
+    $scope.user = Auth.user;
+    $scope.userRoles = Auth.userRoles;
     $scope.accessLevels = Auth.accessLevels;
-    $scope.userRoles =    Auth.userRoles;
 
     $scope.logout = function() {
         Auth.logout(function() {

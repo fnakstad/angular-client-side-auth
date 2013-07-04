@@ -13,6 +13,10 @@ angular.module('angular-client-side-auth')
         _.extend(currentUser, user);
     };
 
+    currentUser.getUserRoleText = function() {
+        return _.invert(userRoles)[this.role];
+    };
+
     return {
         authorize: function(accessLevel, role) {
             if(role === undefined)

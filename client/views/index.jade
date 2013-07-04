@@ -12,11 +12,9 @@ html(lang='en', data-ng-app='angular-client-side-auth')
             if (window.location.href.indexOf('#_=_') > 0) {
                 window.location = window.location.href.replace(/#.*/, '');
             }
-    body(data-ng-controller="AppCtrl", data-ng-cloak)
+    body(data-ng-cloak)
 
-        #cover(data-ng-hide="appInitialized", data-ng-animate="{ hide: 'fade-hide' }")
-
-        .navbar
+        .navbar(data-ng-controller="NavCtrl")
             .navbar-inner
                 .container-fluid
                     ul.nav
@@ -36,7 +34,7 @@ html(lang='en', data-ng-app='angular-client-side-auth')
                     div#userInfo.pull-right(data-access-level='{{ accessLevels.user }}')
                         | Welcome&nbsp;
                         strong {{ user.username }}&nbsp;
-                        span.label(data-ng-class='{"label-info": user.role == userRoles.user, "label-success": user.role == userRoles.admin}') {{ getUserRoleText(user.role) }}
+                        span.label(data-ng-class='{"label-info": user.role == userRoles.user, "label-success": user.role == userRoles.admin}') {{ user.getUserRoleText() }}
 
         .container
             div(data-ng-view='ng-view')

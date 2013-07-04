@@ -86,5 +86,4 @@ angular.module('angular-client-side-auth', ['ngCookies'])
             }
         });
 
-        $rootScope.appInitialized = true;
     }]);
