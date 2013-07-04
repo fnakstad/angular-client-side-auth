@@ -61,8 +61,7 @@ angular.module('angular-client-side-auth')
                 password: $scope.password,
                 role: $scope.role
             },
-            function(res) {
-                $rootScope.user = res;
+            function() {
                 $location.path('/');
             },
             function(err) {
