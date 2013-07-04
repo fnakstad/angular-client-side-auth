@@ -18,23 +18,23 @@ html(lang='en', data-ng-app='angular-client-side-auth')
             .navbar-inner
                 .container-fluid
                     ul.nav
-                        li(data-access-level='{{ accessLevels.anon }}', active-nav)
+                        li(data-access-level='accessLevels.anon', active-nav)
                             a(href='/login') Log in
-                        li(data-access-level='{{ accessLevels.anon }}', active-nav)
+                        li(data-access-level='accessLevels.anon', active-nav)
                             a(href='/register') Register
-                        li(data-access-level='{{ accessLevels.user }}', active-nav)
+                        li(data-access-level='accessLevels.user', active-nav)
                             a(href='/') Home
-                        li(data-access-level='{{ accessLevels.user }}', active-nav)
+                        li(data-access-level='accessLevels.user', active-nav)
                             a(href='/private') Private
-                        li(data-access-level='{{ accessLevels.admin }}', active-nav)
+                        li(data-access-level='accessLevels.admin', active-nav)
                             a(href='/admin') Admin
-                        li(data-access-level='{{ accessLevels.user }}')
+                        li(data-access-level='accessLevels.user')
                             a(href="", data-ng-click="logout()")
                                 | Log out
-                    div#userInfo.pull-right(data-access-level='{{ accessLevels.user }}')
+                    div#userInfo.pull-right(data-access-level='accessLevels.user')
                         | Welcome&nbsp;
                         strong {{ user.username }}&nbsp;
-                        span.label(data-ng-class='{"label-info": user.role == userRoles.user, "label-success": user.role == userRoles.admin}') {{ user.getUserRoleText() }}
+                        span.label(data-ng-class='{"label-info": user.role.title == userRoles.user.title, "label-success": user.role.title == userRoles.admin.title}') {{ user.role.title }}
 
         .container
             div(data-ng-view='ng-view')

@@ -76,8 +76,9 @@ angular.module('angular-client-side-auth')
 
 angular.module('angular-client-side-auth')
 .controller('AdminCtrl',
-['$rootScope', '$scope', 'Users', function($rootScope, $scope, Users) {
+['$rootScope', '$scope', 'Users', 'Auth', function($rootScope, $scope, Users, Auth) {
     $scope.loading = true;
+    $scope.userRoles = Auth.userRoles;
 
     Users.getAll(function(res) {
         $scope.users = res;

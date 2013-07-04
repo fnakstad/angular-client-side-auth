@@ -17,4 +17,4 @@ table.table.table-striped(data-ng-hide="loading")
                i.icon-linkedin(data-ng-show="user.provider == 'linkedin'")
                |  {{ user.username }}
             td
-                span.label(data-ng-class='{"label-info": user.role == userRoles.user, "label-success": user.role == userRoles.admin}') {{ user.getUserRoleText() }}
+                span.label(data-ng-class='{"label-info": user.role.title == userRoles.user.title, "label-success": user.role.title == userRoles.admin.title}') {{ user.role.title }}

@@ -17,7 +17,7 @@ angular.module('angular-client-side-auth')
             }, true);
 
             attrs.$observe('accessLevel', function(al) {
-                if(al) accessLevel = al;
+                if(al) accessLevel = $scope.$eval(al);
                 updateCSS();
             });
 

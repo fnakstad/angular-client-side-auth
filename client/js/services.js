@@ -13,20 +13,17 @@ angular.module('angular-client-side-auth')
         _.extend(currentUser, user);
     };
 
-    currentUser.getUserRoleText = function() {
-        return _.invert(userRoles)[this.role];
-    };
-
     return {
         authorize: function(accessLevel, role) {
             if(role === undefined)
                 role = currentUser.role;
-            return accessLevel & role;
+
+            return accessLevel.bitMask & role.bitMask;
         },
         isLoggedIn: function(user) {
             if(user === undefined)
                 user = currentUser;
-            return user.role === userRoles.user || user.role === userRoles.admin;
+            return user.role == userRoles.user || user.role == userRoles.admin;
         },
         register: function(user, success, error) {
             $http.post('/register', user).success(function(res) {
