@@ -1,16 +1,13 @@
 'use strict';
 
 angular.module('angular-client-side-auth')
-.factory('Auth', function($http, $rootScope, $cookieStore){
+.factory('Auth', function($http, $cookieStore){
 
     var accessLevels = routingConfig.accessLevels
         , userRoles = routingConfig.userRoles
         , currentUser = $cookieStore.get('user') || { username: '', role: userRoles.public };
 
     $cookieStore.remove('user');
-
-    $rootScope.accessLevels = accessLevels;
-    $rootScope.userRoles = userRoles;
 
     function changeUser(user) {
         _.extend(currentUser, user);
