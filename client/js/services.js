@@ -4,46 +4,55 @@ angular.module('angular-client-side-auth')
 .factory('Auth', function($http, $rootScope, $cookieStore){
 
     var accessLevels = routingConfig.accessLevels
-        , userRoles = routingConfig.userRoles;
+        , userRoles = routingConfig.userRoles
+        , currentUser;
 
-    $rootScope.user = $cookieStore.get('user') || { username: '', role: userRoles.public };
+    changeUser($cookieStore.get('user') || { username: '', role: userRoles.public });
     $cookieStore.remove('user');
 
     $rootScope.accessLevels = accessLevels;
     $rootScope.userRoles = userRoles;
 
+    function changeUser(user) {
+        currentUser = user;
+        $rootScope.$broadcast('userChanged', currentUser);
+    };
+
     return {
         authorize: function(accessLevel, role) {
             if(role === undefined)
-                role = $rootScope.user.role;
+                role = currentUser.role;
             return accessLevel & role;
         },
         isLoggedIn: function(user) {
             if(user === undefined)
-                user = $rootScope.user;
+                user = currentUser;
             return user.role === userRoles.user || user.role === userRoles.admin;
         },
         register: function(user, success, error) {
             $http.post('/register', user).success(function(res) {
-                $rootScope.user = res;
+                changeUser(res);
                 success();
             }).error(error);
         },
         login: function(user, success, error) {
             $http.post('/login', user).success(function(user){
-                $rootScope.user = user;
+                changeUser(user);
                 success(user);
             }).error(error);
         },
         logout: function(success, error) {
             $http.post('/logout').success(function(){
-                $rootScope.user.username = '';
-                $rootScope.user.role = userRoles.public;
+                changeUser({
+                    username: '',
+                    role: userRoles.public
+                });
                 success();
             }).error(error);
         },
         accessLevels: accessLevels,
-        userRoles: userRoles
+        userRoles: userRoles,
+        user: currentUser
     };
 });
 

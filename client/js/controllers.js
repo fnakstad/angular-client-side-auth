@@ -10,6 +10,12 @@ angular.module('angular-client-side-auth')
         return _.invert(Auth.userRoles)[role];
     };
 
+    $scope.user = Auth.user;
+
+    $rootScope.$on('userChanged', function(e, user) {
+        $scope.user = user;
+    });
+
     $scope.logout = function() {
         Auth.logout(function() {
             $location.path('/login');

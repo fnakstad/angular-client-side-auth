@@ -6,10 +6,12 @@ angular.module('angular-client-side-auth')
         restrict: 'A',
         link: function(scope, element, attrs) {
             var prevDisp = element.css('display')
-                , userRole, accessLevel;
+                , userRole
+                , accessLevel;
 
-            $rootScope.$watch('user.role', function(role) {
-                if(role) userRole = role;
+            $rootScope.$on('userChanged', function(e, user) {
+                if(user.role)
+                    userRole = user.role;
                 updateCSS();
             });
 
@@ -17,6 +19,11 @@ angular.module('angular-client-side-auth')
                 if(al) accessLevel = al;
                 updateCSS();
             });
+
+            // Initialize userRole
+            if(Auth.user && Auth.user.role)
+                userRole = Auth.user.role;
+            updateCSS();
 
             function updateCSS() {
                 if(userRole && accessLevel) {
