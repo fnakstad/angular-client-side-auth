@@ -5,13 +5,27 @@ angular.module('angular-client-side-auth')
     return {
         restrict: 'A',
         link: function(scope, element, attrs) {
-            var prevDisp = element.css('display');
+            var prevDisp = element.css('display')
+                , userRole, accessLevel;
+
             $rootScope.$watch('user.role', function(role) {
-                if(!Auth.authorize(attrs.accessLevel))
-                    element.css('display', 'none');
-                else
-                    element.css('display', prevDisp);
+                if(role) userRole = role;
+                updateCSS();
             });
+
+            attrs.$observe('accessLevel', function(al) {
+                if(al) accessLevel = al;
+                updateCSS();
+            });
+
+            function updateCSS() {
+                if(userRole && accessLevel) {
+                    if(!Auth.authorize(accessLevel, userRole))
+                        element.css('display', 'none');
+                    else
+                        element.css('display', prevDisp);
+                }
+            }
         }
     };
 }]);
