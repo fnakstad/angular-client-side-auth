@@ -10,10 +10,10 @@ form.form-horizontal(ng-submit="register()", name="registerForm")
             input(type="password", data-ng-model="password", placeholder="Password", name="password", required, data-ng-minlength="5", data-ng-maxlength="60")
     .control-group
         label.radio.inline
-            input(type="radio", name="role", data-ng-model="role", id="adminRole", data-ng-value="{{ userRoles.admin }}")
+            input(type="radio", name="role", data-ng-model="role", id="adminRole", data-ng-value="userRoles.admin")
             | Administrator
         label.radio.inline
-            input(type="radio", name="role", data-ng-model="role", id="adminRole", data-ng-value="{{ userRoles.user }}")
+            input(type="radio", name="role", data-ng-model="role", id="adminRole", data-ng-value="userRoles.user")
             | Normal user
     .control-group
         .controls
