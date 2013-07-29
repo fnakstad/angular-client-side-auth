@@ -18,7 +18,8 @@
         "start": "server.js"
     },
     "engines": {
-        "node": "0.8.x"
+        "node": "0.8.x",
+        "npm": "1.2.x"
     },
     "devDependencies": {
         "sinon": "~1.7.2",
