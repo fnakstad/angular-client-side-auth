@@ -13,6 +13,10 @@
         "passport-google": "~0.3.0",
         "passport-linkedin": "~0.1.3"
     },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/fnakstad/angular-client-side-auth"
+    },
     "subdomain": "angular-client-side-auth",
     "scripts": {
         "start": "server.js"
