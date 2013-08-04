@@ -24,7 +24,7 @@
                     | Remember me
         .control-group
             .controls
-                button.btn(type="submit") Log in
+                button.btn(type="submit", data-ng-disabled="loginForm.$invalid") Log in
     hr
     p ... or use one of them fancy social logins:
     .btn-group
