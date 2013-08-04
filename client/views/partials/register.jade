@@ -19,7 +19,7 @@ form.form-horizontal(ng-submit="register()", name="registerForm")
         .controls
             button.btn(type="submit", data-ng-disabled="registerForm.$invalid") Submit
 
-    .alert.alert-error(ng-show="registerForm.$invalid")
+    .alert.alert-error(ng-show="registerForm.$invalid && registerForm.$dirty")
         strong Please correct the following errors:
         ul
             li(ng-show="registerForm.username.$error.required") Username is required
