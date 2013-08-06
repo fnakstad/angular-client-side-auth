@@ -16,16 +16,14 @@ var routes = [
         middleware: [function (req, res) {
             var requestedView = path.join('./', req.url);
             res.render(requestedView);
-        }],
-        accessLevel: accessLevels.public
+        }]
     },
 
     // OAUTH
     {
         path: '/auth/twitter',
         httpMethod: 'GET',
-        middleware: [passport.authenticate('twitter')],
-        accessLevel: accessLevels.public
+        middleware: [passport.authenticate('twitter')]
     },
     {
         path: '/auth/twitter/callback',
@@ -33,14 +31,12 @@ var routes = [
         middleware: [passport.authenticate('twitter', {
             successRedirect: '/',
             failureRedirect: '/login'
-        })],
-        accessLevel: accessLevels.public
+        })]
     },
     {
         path: '/auth/facebook',
         httpMethod: 'GET',
-        middleware: [passport.authenticate('facebook')],
-        accessLevel: accessLevels.public
+        middleware: [passport.authenticate('facebook')]
     },
     {
         path: '/auth/facebook/callback',
@@ -48,14 +44,12 @@ var routes = [
         middleware: [passport.authenticate('facebook', {
             successRedirect: '/',
             failureRedirect: '/login'
-        })],
-        accessLevel: accessLevels.public
+        })]
     },
     {
         path: '/auth/google',
         httpMethod: 'GET',
-        middleware: [passport.authenticate('google')],
-        accessLevel: accessLevels.public
+        middleware: [passport.authenticate('google')]
     },
     {
         path: '/auth/google/return',
@@ -63,14 +57,12 @@ var routes = [
         middleware: [passport.authenticate('google', {
             successRedirect: '/',
             failureRedirect: '/login'
-        })],
-        accessLevel: accessLevels.public
+        })]
     },
     {
         path: '/auth/linkedin',
         httpMethod: 'GET',
-        middleware: [passport.authenticate('linkedin')],
-        accessLevel: accessLevels.public
+        middleware: [passport.authenticate('linkedin')]
     },
     {
         path: '/auth/linkedin/callback',
@@ -78,35 +70,31 @@ var routes = [
         middleware: [passport.authenticate('linkedin', {
             successRedirect: '/',
             failureRedirect: '/login'
-        })],
-        accessLevel: accessLevels.public
+        })]
     },
 
     // Local Auth
     {
         path: '/register',
         httpMethod: 'POST',
-        middleware: [AuthCtrl.register],
-        accessLevel: accessLevels.public
+        middleware: [AuthCtrl.register]
     },
     {
         path: '/login',
         httpMethod: 'POST',
-        middleware: [AuthCtrl.login],
-        accessLevel: accessLevels.public
+        middleware: [AuthCtrl.login]
     },
     {
         path: '/logout',
         httpMethod: 'POST',
-        middleware: [AuthCtrl.logout],
-        accessLevel: accessLevels.public
+        middleware: [AuthCtrl.logout]
     },
 
     // User resource
     {
         path: '/users',
         httpMethod: 'GET',
-        middleware: [ensureAuthenticated, ensureAuthorized, UserCtrl.index],
+        middleware: [ensureAuthorized, UserCtrl.index],
         accessLevel: accessLevels.admin
     },
 
@@ -125,8 +113,7 @@ var routes = [
                 'role': role
             }));
             res.render('index');
-        }],
-        accessLevel: accessLevels.public
+        }]
     }
 ];
 
@@ -153,11 +140,6 @@ module.exports = function(app) {
                 break;
         }
     });
-}
-
-function ensureAuthenticated(req, res, next) {
-    if(req.isAuthenticated()) return next();
-    else                      return res.send(401);
 }
 
 function ensureAuthorized(req, res, next) {
