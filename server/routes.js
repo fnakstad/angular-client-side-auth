@@ -94,7 +94,7 @@ var routes = [
     {
         path: '/users',
         httpMethod: 'GET',
-        middleware: [ensureAuthorized, UserCtrl.index],
+        middleware: [UserCtrl.index],
         accessLevel: accessLevels.admin
     },
 
@@ -120,6 +120,7 @@ var routes = [
 module.exports = function(app) {
 
     _.each(routes, function(route) {
+        route.middleware.unshift(ensureAuthorized);
         var args = _.flatten([route.path, route.middleware]);
 
         switch(route.httpMethod.toUpperCase()) {
@@ -143,10 +144,12 @@ module.exports = function(app) {
 }
 
 function ensureAuthorized(req, res, next) {
-    if(!req.user) return res.send(401);
+    var role;
+    if(!req.user) role = userRoles.public;
+    else          role = req.user.role;
 
     var accessLevel = _.findWhere(routes, { path: req.route.path }).accessLevel || accessLevels.public;
-    if(!(accessLevel.bitMask & req.user.role.bitMask)) return res.send(403);
 
+    if(!(accessLevel.bitMask & role.bitMask)) return res.send(403);
     return next();
 }
