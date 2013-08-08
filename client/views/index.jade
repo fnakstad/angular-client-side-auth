@@ -37,12 +37,13 @@ html(lang='en', data-ng-app='angular-client-side-auth')
                         span.label(data-ng-class='{"label-info": user.role.title == userRoles.user.title, "label-success": user.role.title == userRoles.admin.title}') {{ user.role.title }}
 
         .container
-            div(data-ng-view='ng-view')
+            div(ui-view)
             .alert.alert-error(data-ng-bind="error", data-ng-show="error")
 
         script(src='http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js')
         script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.js')
         script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-cookies.js')
+        script(src='https://rawgithub.com/angular-ui/ui-router/master/release/angular-ui-router.min.js')
         script(src='/js/routingConfig.js')
         script(src='/js/app.js')
         script(src='/js/services.js')

@@ -1,47 +1,49 @@
 'use strict';
 
-angular.module('angular-client-side-auth', ['ngCookies'])
+angular.module('angular-client-side-auth', ['ngCookies', 'ui.state'])
 
-    .config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
+    .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
 
     var access = routingConfig.accessLevels;
 
-    $routeProvider.when('/',
-        {
-            templateUrl:    '/partials/home',
-            controller:     'HomeCtrl',
-            access:         access.user
-        });
-    $routeProvider.when('/login',
-        {
-            templateUrl:    '/partials/login',
-            controller:     'LoginCtrl',
-            access:         access.anon
-        });
-    $routeProvider.when('/register',
-        {
-            templateUrl:    '/partials/register',
-            controller:     'RegisterCtrl',
-            access:         access.anon
-        });
-    $routeProvider.when('/private',
-        {
-            templateUrl:    '/partials/private',
-            controller:     'PrivateCtrl',
-            access:         access.user
-        });
-    $routeProvider.when('/admin',
-        {
-            templateUrl:    '/partials/admin',
-            controller:     'AdminCtrl',
-            access:         access.admin
-        });
-    $routeProvider.when('/404',
-        {
-            templateUrl:    '/partials/404',
-            access:         access.public
-        });
-    $routeProvider.otherwise({redirectTo:'/404'});
+    $stateProvider.state('Home', {
+        url:         "/",
+        controller:  "HomeCtrl",
+        templateUrl: "/partials/home",
+        access:      access.user
+    });
+    $stateProvider.state('Login', {
+        url:         "/login",
+        controller:  "LoginCtrl",
+        templateUrl: "/partials/login",
+        access:      access.anon
+    });
+    $stateProvider.state('Register', {
+        url:         "/register",
+        controller:  "RegisterCtrl",
+        templateUrl: "/partials/register",
+        access:      access.anon
+    });
+
+    $stateProvider.state('private', {
+        url:         "/private",
+        controller:  "PrivateCtrl",
+        templateUrl: "/partials/private",
+        access:      access.user
+    });
+
+    $stateProvider.state('Admin', {
+        url:         "/admin",
+        controller:  "AdminCtrl",
+        templateUrl: "/partials/admin",
+        access:      access.admin
+    });
+    $stateProvider.state('404', {
+        url:         "/404",
+        templateUrl: "/partials/404",
+        access:      access.admin
+    });
+    $urlRouterProvider.otherwise('/404');
 
     $locationProvider.html5Mode(true);
 
@@ -72,7 +74,7 @@ angular.module('angular-client-side-auth', ['ngCookies'])
 
     .run(['$rootScope', '$location', 'Auth', function ($rootScope, $location, Auth) {
 
-        $rootScope.$on("$routeChangeStart", function (event, next, current) {
+        $rootScope.$on("$stateChangeStart", function (event, next, current) {
             $rootScope.error = null;
             if (!Auth.authorize(next.access)) {
                 if(Auth.isLoggedIn()) $location.path('/');
