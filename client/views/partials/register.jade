@@ -3,7 +3,7 @@ form.form-horizontal(ng-submit="register()", name="registerForm")
     .control-group
         label.control-label(for="username") Username
         .controls
-            input(type="text", data-ng-model="username", placeholder="Username", name="username", required, data-ng-minlength="1", data-ng-maxlength="20")
+            input(type="text", data-ng-model="username", placeholder="Username", name="username", required, data-ng-minlength="1", data-ng-maxlength="20", autofocus)
     .control-group
         label.control-label(for="password") Password
         .controls
