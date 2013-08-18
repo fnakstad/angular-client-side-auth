@@ -8,7 +8,7 @@ html(lang='en', data-ng-app='angular-client-side-auth')
         link(href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.min.css", rel="stylesheet")
 
         // This is needed because Facebook login redirects add #_=_ at the end of the URL
-        script(type="text/javascript")
+        script(type="text/javascript").
             if (window.location.href.indexOf('#_=_') > 0) {
                 window.location = window.location.href.replace(/#.*/, '');
             }
