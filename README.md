@@ -32,6 +32,16 @@ If you want to enable any of the social logins make sure to set the appropriate 
 | LinkedIn | LINKED_IN_SECRET        | -  |
 | LinkedIn |LINKED_IN_CALLBACK_URL   | http://localhost:8000/auth/linkedin/callback |
 
+## Tests
+To run automated tests on controllers:
+```
+mocha server/tests/controllers/
+```
+To run automated tests on server side routes:
+```
+mocha server/tests/server/
+```
+
 ## License
 ```
 The MIT License (MIT)
