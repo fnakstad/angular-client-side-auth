@@ -4,7 +4,7 @@ var express =       require('express')
     , path =        require('path')
     , User =        require('./server/models/User.js');
 
-var app = express();
+var app = module.exports = express();
 
 app.set('views', __dirname + '/client/views');
 app.set('view engine', 'jade');

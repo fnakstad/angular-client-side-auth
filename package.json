@@ -28,7 +28,9 @@
     "devDependencies": {
         "sinon": "~1.7.2",
         "chai": "~1.6.1",
-        "mocha": "~1.10.0"
+        "mocha": "~1.10.0",
+        "supertest": "0.8.0",
+        "passport-stub": "0.1.5"
     },
     "scripts": {
         "test": "mocha server/tests --recursive"
