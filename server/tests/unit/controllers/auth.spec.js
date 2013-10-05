@@ -1,7 +1,7 @@
 var expect = require('chai').expect
     , sinon = require('sinon')
-    , AuthCtrl = require('../../controllers/auth')
-    , User = require('../../models/User');
+    , AuthCtrl = require('../../../controllers/auth')
+    , User = require('../../../models/User');
 
 describe('Auth controller', function() {
 
