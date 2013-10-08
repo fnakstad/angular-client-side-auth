@@ -3,7 +3,7 @@
 /* Controllers */
 
 angular.module('angular-client-side-auth')
-.controller('NavCtrl', ['$scope', '$location', 'Auth', function($rootScope, $scope, $location, Auth) {
+.controller('NavCtrl', ['$rootScope', '$scope', '$location', 'Auth', function($rootScope, $scope, $location, Auth) {
     $scope.user = Auth.user;
     $scope.userRoles = Auth.userRoles;
     $scope.accessLevels = Auth.accessLevels;
