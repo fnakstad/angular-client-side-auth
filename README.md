@@ -12,7 +12,7 @@ To run the server locally, open a terminal, and navigate to the directory you cl
 
 ```
 npm install
-node server.js
+npm start
 ```
 
 Twitter/Facebook/Google auth is enabled by default, but you can easily turn it off  by commenting out the `passport.use()` statements in the [server.js](server.js) file.
