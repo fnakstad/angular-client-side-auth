@@ -24,7 +24,7 @@ var admin = {
     'password':'123'
 };
 
-describe('Server Test - ', function (done) {
+describe('Server Integration Tests - ', function (done) {
     afterEach(function() {
         passportStub.logout(); // logout after each test
     });

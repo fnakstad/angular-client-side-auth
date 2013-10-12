@@ -35,7 +35,7 @@ If you want to enable any of the social logins make sure to set the appropriate 
 ## Tests
 To run automated server tests:
 ```
-mocha --recursive -R list server/tests/
+npm test
 ```
 
 ## License

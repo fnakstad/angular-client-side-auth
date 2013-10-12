@@ -1,38 +1,37 @@
 {
-    "name": "angular-client-side-auth",
-    "version": "0.0.1",
-    "dependencies": {
-        "express": "*",
-        "jade": "*",
-        "passport": "*",
-        "passport-local": "*",
-        "underscore": "*",
-        "validator": "~1.1.1",
-        "passport-twitter": "~0.1.4",
-        "passport-facebook": "~0.1.5",
-        "passport-google": "~0.3.0",
-        "passport-linkedin": "~0.1.3"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/fnakstad/angular-client-side-auth"
-    },
-    "subdomain": "angular-client-side-auth",
-    "scripts": {
-        "start": "server.js"
-    },
-    "engines": {
-        "node": "0.8.x",
-        "npm": "1.2.x"
-    },
-    "devDependencies": {
-        "sinon": "~1.7.2",
-        "chai": "~1.6.1",
-        "mocha": "~1.10.0",
-        "supertest": "0.8.0",
-        "passport-stub": "0.1.5"
-    },
-    "scripts": {
-        "test": "mocha server/tests --recursive"
-    }
+  "name": "angular-client-side-auth",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "*",
+    "jade": "*",
+    "passport": "*",
+    "passport-local": "*",
+    "underscore": "*",
+    "validator": "~1.1.1",
+    "passport-twitter": "~0.1.4",
+    "passport-facebook": "~0.1.5",
+    "passport-google": "~0.3.0",
+    "passport-linkedin": "~0.1.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fnakstad/angular-client-side-auth"
+  },
+  "subdomain": "angular-client-side-auth",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.2.x"
+  },
+  "devDependencies": {
+    "sinon": "~1.7.2",
+    "chai": "~1.6.1",
+    "mocha": "~1.10.0",
+    "supertest": "0.8.0",
+    "passport-stub": "0.1.5",
+    "grunt": "~0.4.1",
+    "grunt-mocha-test": "~0.7.0"
+  }
 }

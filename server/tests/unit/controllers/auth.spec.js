@@ -3,7 +3,7 @@ var expect = require('chai').expect
     , AuthCtrl = require('../../../controllers/auth')
     , User = require('../../../models/User');
 
-describe('Auth controller', function() {
+describe('Auth controller Unit Tests - ', function() {
 
     var req = { }
         , res = {}
