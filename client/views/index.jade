@@ -49,3 +49,17 @@ html(lang='en', data-ng-app='angular-client-side-auth')
         script(src='/js/controllers.js')
         script(src='/js/filters.js')
         script(src='/js/directives.js')
+
+        // Partial views... Load up front to make transitions smoother
+        script(type="text/ng-template", id="404")
+            include partials/404
+        script(type="text/ng-template", id="admin")
+            include partials/admin
+        script(type="text/ng-template", id="home")
+            include partials/home
+        script(type="text/ng-template", id="login")
+            include partials/login
+        script(type="text/ng-template", id="private")
+            include partials/private
+        script(type="text/ng-template", id="register")
+            include partials/register
