@@ -45,32 +45,23 @@ angular.module('angular-client-side-auth', ['ngCookies', 'ngRoute'])
 
     $locationProvider.html5Mode(true);
 
-    var interceptor = ['$location', '$q', function($location, $q) {
-        function success(response) {
-            return response;
-        }
-
-        function error(response) {
-
-            if(response.status === 401) {
-                $location.path('/login');
-                return $q.reject(response);
-            }
-            else {
-                return $q.reject(response);
+    $httpProvider.interceptors.push(function($q, $location) {
+        return {
+            'responseError': function(response) {
+                if(response.status === 401 || response.status === 403) {
+                    $location.path('/login');
+                    return $q.reject(response);
+                }
+                else {
+                    return $q.reject(response);
+                }
             }
         }
-
-        return function(promise) {
-            return promise.then(success, error);
-        }
-    }];
-
-    $httpProvider.responseInterceptors.push(interceptor);
+    });
 
 }])
 
-    .run(['$rootScope', '$location', 'Auth', function ($rootScope, $location, Auth) {
+    .run(['$rootScope', '$location', '$http', 'Auth', function ($rootScope, $location, $http, Auth) {
 
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
             $rootScope.error = null;
