@@ -17,6 +17,11 @@ app.use(express.cookieSession(
     {
         secret: process.env.COOKIE_SECRET || "Superdupersecret"
     }));
+
+app.configure('development', 'production', function() {
+    app.use(express.csrf());
+});
+
 app.use(passport.initialize());
 app.use(passport.session());
 
