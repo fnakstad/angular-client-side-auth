@@ -4,8 +4,8 @@ html(lang='en', data-ng-app='angular-client-side-auth')
         meta(charset='utf-8')
         title Angular Auth Example
         link(rel='stylesheet', href='css/app.css')
-        link(href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css", rel="stylesheet")
-        link(href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.min.css", rel="stylesheet")
+        link(href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css", rel="stylesheet")
+        link(href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css", rel="stylesheet")
 
         // This is needed because Facebook login redirects add #_=_ at the end of the URL
         script(type="text/javascript").
@@ -17,7 +17,7 @@ html(lang='en', data-ng-app='angular-client-side-auth')
         .navbar(data-ng-controller="NavCtrl")
             .navbar-inner
                 .container-fluid
-                    ul.nav
+                    ul.nav.nav-tabs
                         li(data-access-level='accessLevels.anon', active-nav)
                             a(href='/login') Log in
                         li(data-access-level='accessLevels.anon', active-nav)
@@ -31,10 +31,10 @@ html(lang='en', data-ng-app='angular-client-side-auth')
                         li(data-access-level='accessLevels.user')
                             a(href="", data-ng-click="logout()")
                                 | Log out
-                    div#userInfo.pull-right(data-access-level='accessLevels.user')
-                        | Welcome&nbsp;
-                        strong {{ user.username }}&nbsp;
-                        span.label(data-ng-class='{"label-info": user.role.title == userRoles.user.title, "label-success": user.role.title == userRoles.admin.title}') {{ user.role.title }}
+                        div#userInfo.pull-right(data-access-level='accessLevels.user')
+                            | Welcome&nbsp;
+                            strong {{ user.username }}&nbsp;
+                            span.label(data-ng-class='{"label-info": user.role.title == userRoles.user.title, "label-success": user.role.title == userRoles.admin.title}') {{ user.role.title }}
 
         .container
             div(data-ui-view)

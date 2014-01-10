@@ -17,15 +17,15 @@ body {
     float:right;padding:8px;
 }
 
-.icon-twitter {
+.fa.fa-twitter {
     color:#00A7E7;
 }
 
-.icon-facebook-sign {
+.fa.fa-facebook-square {
     color:#3662A0;
 }
 
-.icon-google-plus-sign {
+.fa.fa-google-plus-square {
     color: #D74634;
 }
 
