@@ -6,41 +6,63 @@ angular.module('angular-client-side-auth', ['ngCookies', 'ui.router'])
 
     var access = routingConfig.accessLevels;
 
+    // Public routes
     $stateProvider
-        .state('Home', {
-            url: '/',
-            templateUrl: 'home',
-            controller: 'HomeCtrl',
-            access: access.user
-        })
-        .state('Login', {
-            url: '/login',
-            templateUrl: 'login',
-            controller: 'LoginCtrl',
-            access: access.anon
-        })
-        .state('Register', {
-            url: '/register',
-            templateUrl: 'register',
-            controller: 'RegisterCtrl',
-            access: access.anon
-        })
-        .state('Private', {
-            url: '/private',
-            templateUrl: 'private',
-            controller: 'PrivateCtrl',
-            access: access.user
-        })
-        .state('Admin', {
-            url: '/admin',
-            templateUrl: 'admin',
-            controller: 'AdminCtrl',
-            access: access.admin
-        })
         .state('404', {
             url: '/404',
             templateUrl: '404',
-            access: access.public
+            data: {
+                access: access.public
+            }
+        });
+
+    // Anonymous routes
+    $stateProvider
+        .state('login', {
+            url: '/login',
+            templateUrl: 'login',
+            controller: 'LoginCtrl',
+            data: {
+                access: access.anon
+            }
+        })
+        .state('register', {
+            url: '/register',
+            templateUrl: 'register',
+            controller: 'RegisterCtrl',
+            data: {
+                access: access.anon
+            }
+        });
+
+    // Regular user routes
+    $stateProvider
+        .state('home', {
+            url: '/',
+            templateUrl: 'home',
+            controller: 'HomeCtrl',
+            data: {
+                access: access.user
+            }
+        })
+        .state('private', {
+            url: '/private',
+            templateUrl: 'private',
+            controller: 'PrivateCtrl',
+            data: {
+                access: access.user
+            }
+        });
+
+    // Admin routes
+    $stateProvider
+        .state('admin', {
+            url: '/admin',
+            templateUrl: 'admin',
+            controller: 'AdminCtrl',
+            data: {
+                access: access.admin
+            }
         });
 
 
@@ -67,7 +89,7 @@ angular.module('angular-client-side-auth', ['ngCookies', 'ui.router'])
 
         $rootScope.$on("$stateChangeStart", function (event, next, current) {
             $rootScope.error = null;
-            if (!Auth.authorize(next.access)) {
+            if (!Auth.authorize(next.data.access)) {
                 if(Auth.isLoggedIn()) $location.path('/');
                 else                  $location.path('/login');
             }
