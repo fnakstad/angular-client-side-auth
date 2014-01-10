@@ -8,61 +8,79 @@ angular.module('angular-client-side-auth', ['ngCookies', 'ui.router'])
 
     // Public routes
     $stateProvider
-        .state('404', {
-            url: '/404',
-            templateUrl: '404',
+        .state('public', {
+            abstract: true,
+            template: "<ui-view/>",
             data: {
                 access: access.public
             }
+        })
+        .state('public.404', {
+            url: '/404',
+            templateUrl: '404'
         });
 
     // Anonymous routes
     $stateProvider
-        .state('login', {
-            url: '/login',
-            templateUrl: 'login',
-            controller: 'LoginCtrl',
+        .state('anon', {
+            abstract: true,
+            template: "<ui-view/>",
             data: {
                 access: access.anon
             }
         })
-        .state('register', {
+        .state('anon.login', {
+            url: '/login',
+            templateUrl: 'login',
+            controller: 'LoginCtrl'
+        })
+        .state('anon.register', {
             url: '/register',
             templateUrl: 'register',
-            controller: 'RegisterCtrl',
-            data: {
-                access: access.anon
-            }
+            controller: 'RegisterCtrl'
         });
 
     // Regular user routes
     $stateProvider
-        .state('home', {
-            url: '/',
-            templateUrl: 'home',
-            controller: 'HomeCtrl',
+        .state('user', {
+            abstract: true,
+            template: "<ui-view/>",
             data: {
                 access: access.user
             }
         })
-        .state('private', {
+        .state('user.home', {
+            url: '/',
+            templateUrl: 'home',
+            controller: 'HomeCtrl'
+        })
+        .state('user.private', {
             url: '/private',
             templateUrl: 'private',
             controller: 'PrivateCtrl',
             data: {
                 access: access.user
             }
+        })
+        .state('user.private.nestedOne', {
+            url: '/nestedOne',
+            templateUrl: '',
+            controller: 'PrivateNestedOneCtrl'
         });
 
     // Admin routes
     $stateProvider
         .state('admin', {
-            url: '/admin',
-            templateUrl: 'admin',
-            controller: 'AdminCtrl',
+            abstract: true,
+            template: "<ui-view/>",
             data: {
                 access: access.admin
             }
+        })
+        .state('admin.admin', {
+            url: '/admin',
+            templateUrl: 'admin',
+            controller: 'AdminCtrl'
         });
 
 
