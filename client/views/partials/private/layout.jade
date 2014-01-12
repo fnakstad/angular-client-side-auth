@@ -1,0 +1,11 @@
+.container
+    .row
+        .col-md-7(data-ui-view)
+        .col-md-3
+            ul.nav.nav-pills.nav-stacked(data-ng-controller='NavCtrl')
+                li(active-nav)
+                    a(href='/private') Nested view
+                li(active-nav)
+                    a(href='/private/nested') Another nested view
+                li(active-nav, data-access-level="accessLevels.admin")
+                    a(href='/private/admin') A nested admin view

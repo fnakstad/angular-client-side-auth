@@ -3,7 +3,7 @@ html(lang='en', data-ng-app='angular-client-side-auth')
     head
         meta(charset='utf-8')
         title Angular Auth Example
-        link(rel='stylesheet', href='css/app.css')
+        link(rel='stylesheet', href='/css/app.css')
         link(href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css", rel="stylesheet")
         link(href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css", rel="stylesheet")
 
@@ -36,9 +36,11 @@ html(lang='en', data-ng-app='angular-client-side-auth')
                             strong {{ user.username }}&nbsp;
                             span.label(data-ng-class='{"label-info": user.role.title == userRoles.user.title, "label-success": user.role.title == userRoles.admin.title}') {{ user.role.title }}
 
-        .container
-            div(data-ui-view)
-            .alert.alert-error(data-ng-bind="error", data-ng-show="error")
+        .container(data-ui-view)
+        #alertBox.alert.alert-danger(data-ng-show="error")
+            button(type="button", class="close", data-ng-click="error = null;") &times;
+            strong Oh no!&nbsp;
+            span(data-ng-bind="error")
 
         script(src='http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js')
         script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js')
@@ -60,7 +62,13 @@ html(lang='en', data-ng-app='angular-client-side-auth')
             include partials/home
         script(type="text/ng-template", id="login")
             include partials/login
-        script(type="text/ng-template", id="private")
-            include partials/private
+        script(type="text/ng-template", id="private/layout")
+            include partials/private/layout
+        script(type="text/ng-template", id="private/home")
+            include partials/private/home
+        script(type="text/ng-template", id="private/nested")
+            include partials/private/nested
+        script(type="text/ng-template", id="private/nestedAdmin")
+            include partials/private/nestedAdmin
         script(type="text/ng-template", id="register")
             include partials/register

@@ -16,7 +16,7 @@ angular.module('angular-client-side-auth', ['ngCookies', 'ui.router'])
             }
         })
         .state('public.404', {
-            url: '/404',
+            url: '/404/',
             templateUrl: '404'
         });
 
@@ -30,12 +30,12 @@ angular.module('angular-client-side-auth', ['ngCookies', 'ui.router'])
             }
         })
         .state('anon.login', {
-            url: '/login',
+            url: '/login/',
             templateUrl: 'login',
             controller: 'LoginCtrl'
         })
         .state('anon.register', {
-            url: '/register',
+            url: '/register/',
             templateUrl: 'register',
             controller: 'RegisterCtrl'
         });
@@ -51,21 +51,27 @@ angular.module('angular-client-side-auth', ['ngCookies', 'ui.router'])
         })
         .state('user.home', {
             url: '/',
-            templateUrl: 'home',
-            controller: 'HomeCtrl'
+            templateUrl: 'home'
         })
         .state('user.private', {
-            url: '/private',
-            templateUrl: 'private',
-            controller: 'PrivateCtrl',
-            data: {
-                access: access.user
-            }
+            abstract: true,
+            url: '/private/',
+            templateUrl: 'private/layout'
         })
-        .state('user.private.nestedOne', {
-            url: '/nestedOne',
-            templateUrl: '',
-            controller: 'PrivateNestedOneCtrl'
+        .state('user.private.home', {
+            url: '',
+            templateUrl: 'private/home'
+        })
+        .state('user.private.nested', {
+            url: 'nested/',
+            templateUrl: 'private/nested'
+        })
+        .state('user.private.admin', {
+            url: 'admin/',
+            templateUrl: 'private/nestedAdmin',
+            data: {
+                access: access.admin
+            }
         });
 
     // Admin routes
@@ -78,13 +84,40 @@ angular.module('angular-client-side-auth', ['ngCookies', 'ui.router'])
             }
         })
         .state('admin.admin', {
-            url: '/admin',
+            url: '/admin/',
             templateUrl: 'admin',
             controller: 'AdminCtrl'
         });
 
 
     $urlRouterProvider.otherwise('/404');
+
+    // FIX for trailing slashes. Gracefully "borrowed" from https://github.com/angular-ui/ui-router/issues/50
+    $urlRouterProvider.rule(function($injector, $location) {
+        var path = $location.path()
+        // Note: misnomer. This returns a query object, not a search string
+            , search = $location.search()
+            , params
+            ;
+
+        // check to see if the path already ends in '/'
+        if (path[path.length - 1] === '/') {
+            return;
+        }
+
+        // If there was no search string / query params, return with a `/`
+        if (Object.keys(search).length === 0) {
+            return path + '/';
+        }
+
+        // Otherwise build the search string and return a `/?` prefix
+        params = [];
+        angular.forEach(search, function(v, k){
+            params.push(k + '=' + v);
+        });
+        return path + '/?' + params.join('&');
+    });
+
     $locationProvider.html5Mode(true);
 
     $httpProvider.interceptors.push(function($q, $location) {
@@ -103,13 +136,16 @@ angular.module('angular-client-side-auth', ['ngCookies', 'ui.router'])
 
 }])
 
-    .run(['$rootScope', '$location', 'Auth', function ($rootScope, $location, Auth) {
+    .run(['$rootScope', '$state', 'Auth', function ($rootScope, $state, Auth) {
 
-        $rootScope.$on("$stateChangeStart", function (event, next, current) {
-            $rootScope.error = null;
-            if (!Auth.authorize(next.data.access)) {
-                if(Auth.isLoggedIn()) $location.path('/');
-                else                  $location.path('/login');
+        $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
+            if (!Auth.authorize(toState.data.access)) {
+                event.preventDefault();
+                if(fromState.url === '^') {
+                    if(Auth.isLoggedIn())    $state.go('user.home');
+                    else                          $state.go('anon.login');
+                }
+                $rootScope.error = "Seems like you tried accessing a route you don't have access to...";
             }
         });
 

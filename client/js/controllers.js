@@ -42,12 +42,6 @@ angular.module('angular-client-side-auth')
 }]);
 
 angular.module('angular-client-side-auth')
-.controller('HomeCtrl',
-['$rootScope', function($rootScope) {
-
-}]);
-
-angular.module('angular-client-side-auth')
 .controller('RegisterCtrl',
 ['$rootScope', '$scope', '$location', 'Auth', function($rootScope, $scope, $location, Auth) {
     $scope.role = Auth.userRoles.user;
@@ -67,12 +61,6 @@ angular.module('angular-client-side-auth')
             });
     };
 }]);
-
-angular.module('angular-client-side-auth')
-.controller('PrivateCtrl',
-['$rootScope', function($rootScope) {
-}]);
-
 
 angular.module('angular-client-side-auth')
 .controller('AdminCtrl',
