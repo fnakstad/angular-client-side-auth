@@ -1,11 +1,10 @@
 .container
     .row
-        .col-md-7(data-ui-view)
-        .col-md-3
-            ul.nav.nav-pills.nav-stacked(data-ng-controller='NavCtrl')
-                li(active-nav)
-                    a(href='/private') Nested view
-                li(active-nav)
-                    a(href='/private/nested') Another nested view
-                li(active-nav, data-access-level="accessLevels.admin")
-                    a(href='/private/admin') A nested admin view
+        .col-md-4.col-md-push-6
+            div.list-group(data-ng-controller='NavCtrl')
+                .list-group-item
+                    strong Nested menu
+                a.list-group-item(href='/private', active-nav) Nested view
+                a.list-group-item(href='/private/nested', active-nav) Another nested view
+                a.list-group-item(href='/private/admin', active-nav, data-access-level='accessLevels.admin') A nested admin view
+        .col-md-6.col-md-pull-4(data-ui-view)

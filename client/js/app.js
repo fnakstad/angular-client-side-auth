@@ -136,17 +136,17 @@ angular.module('angular-client-side-auth', ['ngCookies', 'ui.router'])
 
 }])
 
-    .run(['$rootScope', '$state', 'Auth', function ($rootScope, $state, Auth) {
+.run(['$rootScope', '$state', 'Auth', function ($rootScope, $state, Auth) {
 
-        $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
-            if (!Auth.authorize(toState.data.access)) {
-                event.preventDefault();
-                if(fromState.url === '^') {
-                    if(Auth.isLoggedIn())    $state.go('user.home');
-                    else                          $state.go('anon.login');
-                }
-                $rootScope.error = "Seems like you tried accessing a route you don't have access to...";
+    $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
+        if (!Auth.authorize(toState.data.access)) {
+            event.preventDefault();
+            if(fromState.url === '^') {
+                if(Auth.isLoggedIn())    $state.go('user.home');
+                else                          $state.go('anon.login');
             }
-        });
+            $rootScope.error = "Seems like you tried accessing a route you don't have access to...";
+        }
+    });
 
-    }]);
+}]);

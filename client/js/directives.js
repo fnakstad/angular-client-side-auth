@@ -37,11 +37,10 @@ angular.module('angular-client-side-auth').directive('activeNav', ['$location', 
     return {
         restrict: 'A',
         link: function(scope, element, attrs) {
-            var nestedA = element.find('a')[0];
-            var path = nestedA.href;
-
-            if(attrs.activeNav)
-                console.log(attrs.activeNav);
+            var anchor = element[0];
+            if(element[0].tagName.toUpperCase() != 'A')
+                anchor = element.find('a')[0];
+            var path = anchor.href;
 
             scope.location = $location;
             scope.$watch('location.absUrl()', function(newPath) {
