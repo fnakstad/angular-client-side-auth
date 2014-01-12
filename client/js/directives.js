@@ -40,9 +40,16 @@ angular.module('angular-client-side-auth').directive('activeNav', ['$location', 
             var nestedA = element.find('a')[0];
             var path = nestedA.href;
 
+            if(attrs.activeNav)
+                console.log(attrs.activeNav);
+
             scope.location = $location;
             scope.$watch('location.absUrl()', function(newPath) {
-                if (path === newPath || path === newPath + '/' || path + '/' === newPath) {
+                path = normalizeUrl(path);
+                newPath = normalizeUrl(newPath);
+
+                if(path === newPath ||
+                    (attrs.activeNav === 'nestedTop' && newPath.indexOf(path) === 0)) {
                     element.addClass('active');
                 } else {
                     element.removeClass('active');
@@ -51,5 +58,11 @@ angular.module('angular-client-side-auth').directive('activeNav', ['$location', 
         }
 
     };
+
+    function normalizeUrl(url) {
+        if(url[url.length - 1] !== '/')
+            url = url + '/';
+        return url;
+    }
 
 }]);
