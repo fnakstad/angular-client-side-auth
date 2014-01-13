@@ -20,11 +20,10 @@ app.use(express.cookieSession(
 
 app.configure('development', 'production', function() {
     app.use(express.csrf());
-});
-
-app.use(function(req, res, next) {
-    res.cookie('XSRF-TOKEN', req.csrfToken());
-    next();
+    app.use(function(req, res, next) {
+        res.cookie('XSRF-TOKEN', req.csrfToken());
+        next();
+    });
 });
 
 app.use(passport.initialize());
