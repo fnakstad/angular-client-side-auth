@@ -19,8 +19,8 @@
   },
   "subdomain": "angular-client-side-auth",
   "scripts": {
-    "start": "NODE_ENV=development node server.js",
-    "test": "NODE_ENV=test grunt test"
+    "start": "grunt dev",
+    "test": "grunt test"
   },
   "engines": {
     "node": "0.8.x",
@@ -32,7 +32,10 @@
     "mocha": "~1.10.0",
     "supertest": "0.8.0",
     "passport-stub": "0.1.5",
+    "nodemon": "~1.0.12",
     "grunt": "~0.4.1",
-    "grunt-mocha-test": "~0.7.0"
+    "grunt-mocha-test": "~0.7.0",
+    "grunt-env": "~0.4.1",
+    "grunt-nodemon": "~0.2.0"
   }
 }
