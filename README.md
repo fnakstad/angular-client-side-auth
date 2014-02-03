@@ -5,7 +5,7 @@ One way to implement authentication/authorization in Angular applications.
 
 * Blogposts: 
   * [Original post discussing Angular.js client-side solution](http://www.frederiknakstad.com/authentication-in-single-page-applications-with-angular-js/)
-  * [Follow-up post disussing Node.js server-side solution](http://www.frederiknakstad.com/blog/2013/08/04/authentication-in-single-page-applications-with-angular.js-part-2/)
+  * [Follow-up post discussing Node.js server-side solution](http://www.frederiknakstad.com/blog/2013/08/04/authentication-in-single-page-applications-with-angular.js-part-2/)
 * [Live version](http://angular-client-side-auth.herokuapp.com/)
 
 To run the server locally, open a terminal, and navigate to the directory you cloned the project to. Then run the following commands:
