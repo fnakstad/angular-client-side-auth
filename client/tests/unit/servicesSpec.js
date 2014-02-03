@@ -16,6 +16,12 @@ describe('services', function() {
     Auth = $injector.get('Auth');
   }));
 
+  // On module load there will always be a stateChange event to the login state
+  beforeEach(function() {
+      $httpBackend.expectGET('login').respond();
+      $httpBackend.flush();
+  });
+
   afterEach(function() {
     $httpBackend.verifyNoOutstandingExpectation();
     $httpBackend.verifyNoOutstandingRequest();

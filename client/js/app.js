@@ -94,6 +94,9 @@ angular.module('angular-client-side-auth', ['ngCookies', 'ui.router'])
 
     // FIX for trailing slashes. Gracefully "borrowed" from https://github.com/angular-ui/ui-router/issues/50
     $urlRouterProvider.rule(function($injector, $location) {
+        if($location.protocol() === 'file')
+            return;
+
         var path = $location.path()
         // Note: misnomer. This returns a query object, not a search string
             , search = $location.search()
@@ -143,7 +146,7 @@ angular.module('angular-client-side-auth', ['ngCookies', 'ui.router'])
             event.preventDefault();
             if(fromState.url === '^') {
                 if(Auth.isLoggedIn())    $state.go('user.home');
-                else                          $state.go('anon.login');
+                else                     $state.go('anon.login');
             }
             $rootScope.error = "Seems like you tried accessing a route you don't have access to...";
         }

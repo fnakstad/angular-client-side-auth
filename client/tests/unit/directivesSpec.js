@@ -4,90 +4,93 @@
 
 
 describe('directives', function() {
-    var scope, elem;
-	beforeEach(module('angular-client-side-auth'));
-	
+    var scope, elem, $httpBackend, Auth;
 
-	describe('accessLevel', function() {		
-        beforeEach(function() {
-		
-		    var mockAuth = {
-				user :{ name:'', role:{bitMask: 1, title: "public"}},
-				authorize:function(accessLevel, role){
-					return accessLevel.bitMask & role.bitMask;
-				}
-			}
-			
-			var accessLevels = {
-				"public":{"bitMask":7,"title":"*"},
-				"anon":{"bitMask":1,"title":"public"},
-				"user":{"bitMask":6,"title":"admin"},//user & admin
-				"admin":{"bitMask":4,"title":"admin"},
-				"useronly":{"bitMask":2,"title":"user"}
-			};
-							
-		    module(function($provide) {
-			    $provide.value('Auth', mockAuth);
-				$provide.value('accessLevels', accessLevels);				
-		    });
-		})
-	
-		it('when user is public and access is public - the menu must be visible',inject(function($compile, $rootScope, accessLevels){
-		
+    beforeEach(
+        module('angular-client-side-auth')
+    );
 
-		    scope = $rootScope.$new();
-			scope.accessLevels = accessLevels;
+    beforeEach(inject(function($injector) {
+        $httpBackend = $injector.get('$httpBackend');
+        Auth = $injector.get('Auth');
+    }));
 
-		    var elem = $compile("<li data-access-level='accessLevels.anon'>some text here</li>")(scope);
-			
-			//fire watch
-			scope.$apply();
-						
-			expect(elem.css('display')).toEqual('');	
-		}));
-		
-	
-		it('when user is public and access is user - the menu must be hidden',inject(function($compile, $rootScope, accessLevels){		
-
-		    scope = $rootScope.$new();
-			scope.accessLevels = accessLevels;
-
-		    var elem = $compile("<li data-access-level='accessLevels.user'>some text here</li>")(scope);
-			
-			//fire watch
-			scope.$apply();
-						
-			expect(elem.css('display')).toEqual('none');	
-		}))		
+    // On module load there will always be a stateChange event to the login state
+    beforeEach(function() {
+        $httpBackend.expectGET('login').respond();
+        $httpBackend.flush();
     });
 
-	describe('activeNav', function() {
-	    var scope, location, compile;
-		beforeEach(inject(function($compile, $rootScope, $location) {
-			scope = $rootScope.$new();
-            location = $location
-			compile = $compile;
-		}));
-		it('when location is same as "href" of link - the link must be decorated with "active" class',function(){
-		    location.path('someurl');
-		
-		    var elem = compile("<li data-active-nav ><a href='http://server/someurl'>somelink</a></li>")(scope);
-			
-			//fire watch
-			scope.$apply();            		
-			expect(elem.hasClass('active')).toBe(true);
-		});
-		
-		it('when location is different from "href" of link - the "active" class must be removed',function(){
-		    location.path('some_different_url');
-		    //initially  decorated with 'active'
-		    var elem = compile("<li data-active-nav class='active'><a href='http://server/someurl'>somelink</a></li>")(scope);
-			
-			//fire watch
-			scope.$apply();            		
-			expect(elem.hasClass('active')).toBe(false);
-		})		
-	})
+    afterEach(function() {
+        $httpBackend.verifyNoOutstandingExpectation();
+        $httpBackend.verifyNoOutstandingRequest();
+    });
 
-	
+    describe('accessLevel', function() {
+    
+        it('when user is public and access is public - the menu must be visible',inject(function($compile, $rootScope){
+        
+
+            scope = $rootScope.$new();
+            scope.accessLevels = routingConfig.accessLevels;
+
+            var elem = $compile("<li data-access-level='accessLevels.anon'>some text here</li>")(scope);
+            
+            //fire watch
+            scope.$apply();
+                        
+            expect(elem.css('display')).toEqual('');    
+        }));
+        
+    
+        it('when user is public and access is user - the menu must be hidden',inject(function($compile, $rootScope){
+
+            scope = $rootScope.$new();
+            scope.accessLevels = routingConfig.accessLevels;
+
+            var elem = $compile("<li data-access-level='accessLevels.user'>some text here</li>")(scope);
+            
+            //fire watch
+            scope.$apply();
+                        
+            expect(elem.css('display')).toEqual('none');    
+        }))        
+    });
+
+    describe('activeNav', function() {
+        var location, compile;
+
+        beforeEach(inject(function($compile, $rootScope, $location) {
+            scope = $rootScope.$new();
+            location = $location
+            compile = $compile;
+        }));
+
+        it('when location is same as "href" of link - the link must be decorated with "active" class',function(){
+            location.path('register');
+            $httpBackend.expectGET('register').respond();
+            $httpBackend.flush();
+        
+            var elem = compile("<li data-active-nav ><a href='http://server/register'>Register</a></li>")(scope);
+            
+            //fire watch
+            scope.$apply();                    
+            expect(elem.hasClass('active')).toBe(true);
+        });
+        
+        it('when location is different from "href" of link - the "active" class must be removed',function(){
+            location.path('register');
+            $httpBackend.expectGET('register').respond();
+            $httpBackend.flush();
+
+            //initially  decorated with 'active'
+            var elem = compile("<li data-active-nav class='active'><a href='http://server/login'>somelink</a></li>")(scope);
+            
+            //fire watch
+            scope.$apply();                    
+            expect(elem.hasClass('active')).toBe(false);
+        })        
+    })
+
+    
 });
