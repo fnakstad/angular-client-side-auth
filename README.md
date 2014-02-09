@@ -3,10 +3,13 @@ angular-client-side-auth
 
 One way to implement authentication/authorization in Angular applications.
 
+**This repo now uses [UI-router](https://github.com/angular-ui/ui-router) rather than [ngRoute](http://docs.angularjs.org/api/ngRoute). For details on how this works [please read this post](http://www.frederiknakstad.com/2014/02/09/ui-router-in-angular-client-side-auth/).**
+
 * Blogposts: 
   * [Original post discussing Angular.js client-side solution](http://www.frederiknakstad.com/authentication-in-single-page-applications-with-angular-js/)
   * [Follow-up post discussing Node.js server-side solution](http://www.frederiknakstad.com/blog/2013/08/04/authentication-in-single-page-applications-with-angular.js-part-2/)
 * [Live version](http://angular-client-side-auth.herokuapp.com/)
+* [UI-router and angular-client-side-auth](http://www.frederiknakstad.com/2014/02/09/ui-router-in-angular-client-side-auth/)
 
 To run the server locally, open a terminal, and navigate to the directory you cloned the project to. Then run the following commands:
 
