@@ -1,6 +1,7 @@
 {
   "name": "angular-client-side-auth",
   "dependencies": {
+    "angular": "~1.2.12",
     "angular-ui-router": "0.2.8-bowratic-tedium",
     "bootstrap": "~3.1.0",
     "font-awesome": "~4.0.3",
