@@ -30,93 +30,93 @@ describe('services', function() {
   describe('Auth', function() {
     describe('instantiate', function() {
       it('should have isLoggedIn function', function() {
-        expect(Auth.isLoggedIn).toBeDefined();
-        expect(_.isFunction(Auth.isLoggedIn)).toEqual(true);
+        expect(Auth.isLoggedIn).to.not.be.undefined;
+        expect(_.isFunction(Auth.isLoggedIn)).to.equal(true);
       });
 
       it('should have authorize function', function() {
-        expect(Auth.authorize).toBeDefined();
-        expect(_.isFunction(Auth.authorize)).toEqual(true);
+        expect(Auth.authorize).to.not.be.undefined;
+        expect(_.isFunction(Auth.authorize)).to.equal(true);
       });
 
       it('should have login function', function() {
-        expect(Auth.login).toBeDefined();
-        expect(_.isFunction(Auth.login)).toEqual(true);
+        expect(Auth.login).to.not.be.undefined;
+        expect(_.isFunction(Auth.login)).to.equal(true);
       });
 
       it('should have logout function', function() {
-        expect(Auth.logout).toBeDefined();
-        expect(_.isFunction(Auth.logout)).toEqual(true);
+        expect(Auth.logout).to.not.be.undefined;
+        expect(_.isFunction(Auth.logout)).to.equal(true);
       });
 
       it('should have register function', function() {
-        expect(Auth.register).toBeDefined();
-        expect(_.isFunction(Auth.register)).toEqual(true);
+        expect(Auth.register).to.not.be.undefined;
+        expect(_.isFunction(Auth.register)).to.equal(true);
       });
 
       it('should have the user object', function() {
-        expect(Auth.user).toBeDefined();
-        expect(_.isObject(Auth.user)).toEqual(true);
+        expect(Auth.user).to.not.be.undefined;
+        expect(_.isObject(Auth.user)).to.equal(true);
       });
 
       it('should have the userRoles object', function() {
-        expect(Auth.userRoles).toBeDefined();
-        expect(_.isObject(Auth.userRoles)).toEqual(true);
+        expect(Auth.userRoles).to.not.be.undefined;
+        expect(_.isObject(Auth.userRoles)).to.equal(true);
       });
 
       it('should have the accessLevels object', function() {
-        expect(Auth.accessLevels).toBeDefined();
-        expect(_.isObject(Auth.accessLevels)).toEqual(true);
+        expect(Auth.accessLevels).to.not.be.undefined;
+        expect(_.isObject(Auth.accessLevels)).to.equal(true);
       });
 
       it('should set the user object with no name and public role', function() {
-        expect(Auth.user).toEqual({ username: '', role: Auth.userRoles.public });
+        expect(Auth.user).to.deep.equal({ username: '', role: Auth.userRoles.public });
       });
     });
 
     describe('authorize', function() {
       it('should return 0 when role not recognized', function() {
-        expect(Auth.authorize('foo')).toEqual(0);
+        expect(Auth.authorize('foo')).to.equal(0);
       });
 
       it('should return 1 when role is recognized', function() {
         var accessLevels = { bitMask: 1 };
         var role = { bitMask: 1 };
-        expect(Auth.authorize(accessLevels, role)).toEqual(1);
+        expect(Auth.authorize(accessLevels, role)).to.equal(1);
       });
 
       it('should return 0 when role is omitted and not equal', function() {
         var accessLevels = { bitMask: 0 };
-        expect(Auth.user.role.bitMask).toEqual(1);
-        expect(Auth.authorize(accessLevels)).toEqual(0);
+        expect(Auth.user.role.bitMask).to.equal(1);
+        expect(Auth.authorize(accessLevels)).to.equal(0);
       });
 
       it('should return 1 when role is omitted but equal', function() {
         var accessLevels = { bitMask: 1 };
-        expect(Auth.user.role.bitMask).toEqual(1);
-        expect(Auth.authorize(accessLevels)).toEqual(1);
+        expect(Auth.user.role.bitMask).to.equal(1);
+        expect(Auth.authorize(accessLevels)).to.equal(1);
       });
     });
 
     describe('isLoggedIn', function() {
       it('should use the currentUser when use omitted', function() {
         // current user has role public
-        expect(Auth.isLoggedIn()).toEqual(false);
+        expect(Auth.isLoggedIn()).to.equal(false);
       });
 
       it('should return false when user has role public', function() {
         var user = { role: { title: 'public' } };
-        expect(Auth.isLoggedIn(user)).toEqual(false);
+        expect(Auth.isLoggedIn(user)).to.equal(false);
       });
 
       it('should return true when user has role user', function() {
         var user = { role: { title: 'user' } };
-        expect(Auth.isLoggedIn(user)).toEqual(true);
+        expect(Auth.isLoggedIn(user)).to.equal(true);
       });
 
       it('should return true when user has role admin', function() {
         var user = { role: { title: 'admin' } };
-        expect(Auth.isLoggedIn(user)).toEqual(true);
+        expect(Auth.isLoggedIn(user)).to.equal(true);
       });
     });
 
@@ -130,7 +130,7 @@ describe('services', function() {
         $httpBackend.expectPOST('/register').respond();
         Auth.register({}, success, error);
         $httpBackend.flush();
-        expect(invoked).toEqual(true);
+        expect(invoked).to.equal(true);
       });
 
       it('should append the user', function() {
@@ -139,7 +139,7 @@ describe('services', function() {
         $httpBackend.expectPOST('/register').respond({ 'user': 'foo' });
         Auth.register({}, success, error);
         $httpBackend.flush();
-        expect(Auth.user).toEqual({ username : '', role : { bitMask : 1, title : 'public' }, user : 'foo' });
+        expect(Auth.user).to.deep.equal({ username : '', role : { bitMask : 1, title : 'public' }, user : 'foo' });
       });
     });
 
@@ -153,7 +153,7 @@ describe('services', function() {
         $httpBackend.expectPOST('/login').respond();
         Auth.login({}, success, error);
         $httpBackend.flush();
-        expect(invoked).toEqual(true);
+        expect(invoked).to.equal(true);
       });
 
       it('should append the user', function() {
@@ -162,7 +162,7 @@ describe('services', function() {
         $httpBackend.expectPOST('/login').respond({ 'user': 'bar' });
         Auth.login({}, success, error);
         $httpBackend.flush();
-        expect(Auth.user).toEqual({ username : '', role : { bitMask : 1, title : 'public' }, user : 'bar' });
+        expect(Auth.user).to.deep.equal({ username : '', role : { bitMask : 1, title : 'public' }, user : 'bar' });
       });
     });
 
@@ -176,7 +176,7 @@ describe('services', function() {
         $httpBackend.expectPOST('/logout').respond();
         Auth.logout(success, error);
         $httpBackend.flush();
-        expect(invoked).toEqual(true);
+        expect(invoked).to.equal(true);
       });
     });
   });

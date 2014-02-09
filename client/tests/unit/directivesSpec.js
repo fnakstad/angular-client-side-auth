@@ -39,7 +39,7 @@ describe('directives', function() {
             //fire watch
             scope.$apply();
                         
-            expect(elem.css('display')).toEqual('');    
+            expect(elem.css('display')).to.equal('');
         }));
         
     
@@ -53,7 +53,7 @@ describe('directives', function() {
             //fire watch
             scope.$apply();
                         
-            expect(elem.css('display')).toEqual('none');    
+            expect(elem.css('display')).to.equal('none');
         }))        
     });
 
@@ -75,7 +75,7 @@ describe('directives', function() {
             
             //fire watch
             scope.$apply();                    
-            expect(elem.hasClass('active')).toBe(true);
+            expect(elem.hasClass('active')).to.equal(true);
         });
         
         it('when location is different from "href" of link - the "active" class must be removed',function(){
@@ -88,7 +88,7 @@ describe('directives', function() {
             
             //fire watch
             scope.$apply();                    
-            expect(elem.hasClass('active')).toBe(false);
+            expect(elem.hasClass('active')).to.equal(false);
         })        
     })
 

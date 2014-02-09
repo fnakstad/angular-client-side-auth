@@ -7,5 +7,8 @@
     "font-awesome": "~4.0.3",
     "underscore": "~1.5.2",
     "angular-cookies": "~1.2.12"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.2.12"
   }
 }
