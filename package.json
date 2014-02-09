@@ -11,7 +11,8 @@
     "passport-twitter": "~0.1.4",
     "passport-facebook": "~0.1.5",
     "passport-google": "~0.3.0",
-    "passport-linkedin": "~0.1.3"
+    "passport-linkedin": "~0.1.3",
+    "bower": "~1.2.8"
   },
   "repository": {
     "type": "git",
@@ -20,7 +21,8 @@
   "subdomain": "angular-client-side-auth",
   "scripts": {
     "start": "grunt dev",
-    "test": "grunt test"
+    "test": "grunt test",
+    "postinstall": "./node_modules/bower/bin/bower install"
   },
   "engines": {
     "node": "0.8.x",
