@@ -18,16 +18,16 @@ html(lang='en', data-ng-app='angular-client-side-auth')
             .navbar-inner
                 .container-fluid
                     ul.nav.nav-tabs
-                        li(data-access-level='accessLevels.anon', active-nav)
-                            a(href='/login') Log in
-                        li(data-access-level='accessLevels.anon', active-nav)
-                            a(href='/register') Register
-                        li(data-access-level='accessLevels.user', active-nav)
-                            a(href='/') Home
-                        li(data-access-level='accessLevels.user', active-nav='nestedTop')
-                            a(href='/private') Private
-                        li(data-access-level='accessLevels.admin', active-nav)
-                            a(href='/admin') Admin
+                        li(data-access-level='accessLevels.anon', ui-sref-active="active")
+                            a(ui-sref='anon.login') Log in
+                        li(data-access-level='accessLevels.anon', ui-sref-active="active")
+                            a(ui-sref='anon.register') Register
+                        li(data-access-level='accessLevels.user', ui-sref-active="active")
+                            a(ui-sref='user.home') Home
+                        li(data-access-level='accessLevels.user', ui-sref-active="active")
+                            a(ui-sref='user.private.home') Private
+                        li(data-access-level='accessLevels.admin', ui-sref-active="active")
+                            a(ui-sref='admin.admin') Admin
                         li(data-access-level='accessLevels.user')
                             a(href="", data-ng-click="logout()")
                                 | Log out

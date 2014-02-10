@@ -3,8 +3,8 @@
         .col-md-4.col-md-push-6
             div.list-group(data-ng-controller='NavCtrl')
                 .list-group-item
-                    strong Nested menu
-                a.list-group-item(href='/private', active-nav) Nested view
-                a.list-group-item(href='/private/nested', active-nav) Another nested view
-                a.list-group-item(href='/private/admin', active-nav, data-access-level='accessLevels.admin') A nested admin view
+                    strong Nested menu yop
+                a.list-group-item(ui-sref='user.private.home', ui-sref-active="active") Nested view
+                a.list-group-item(ui-sref='user.private.nested', ui-sref-active="active") Another nested view
+                a.list-group-item(ui-sref='user.private.admin', ui-sref-active="active", data-access-level='accessLevels.admin') A nested admin view
         .col-md-6.col-md-pull-4(data-ui-view)
