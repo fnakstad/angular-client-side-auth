@@ -56,41 +56,5 @@ describe('directives', function() {
             expect(elem.css('display')).to.equal('none');
         }))        
     });
-
-    describe('activeNav', function() {
-        var location, compile;
-
-        beforeEach(inject(function($compile, $rootScope, $location) {
-            scope = $rootScope.$new();
-            location = $location
-            compile = $compile;
-        }));
-
-        it('when location is same as "href" of link - the link must be decorated with "active" class',function(){
-            location.path('register');
-            $httpBackend.expectGET('register').respond();
-            $httpBackend.flush();
-        
-            var elem = compile("<li data-active-nav ><a href='http://server/register'>Register</a></li>")(scope);
-            
-            //fire watch
-            scope.$apply();                    
-            expect(elem.hasClass('active')).to.equal(true);
-        });
-        
-        it('when location is different from "href" of link - the "active" class must be removed',function(){
-            location.path('register');
-            $httpBackend.expectGET('register').respond();
-            $httpBackend.flush();
-
-            //initially  decorated with 'active'
-            var elem = compile("<li data-active-nav class='active'><a href='http://server/login'>somelink</a></li>")(scope);
-            
-            //fire watch
-            scope.$apply();                    
-            expect(elem.hasClass('active')).to.equal(false);
-        })        
-    })
-
     
 });
