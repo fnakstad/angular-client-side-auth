@@ -4,6 +4,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-mocha-test');
     grunt.loadNpmTasks('grunt-env');
     grunt.loadNpmTasks('grunt-nodemon');
+    grunt.loadNpmTasks('grunt-contrib-clean');
 
     grunt.initConfig({
 
@@ -32,7 +33,9 @@ module.exports = function(grunt) {
             dev: {
                 script: 'server.js'
             }
-        }
+        },
+
+        clean: ["node_modules", "client/components"]
 
     });
 

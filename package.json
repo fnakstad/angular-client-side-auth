@@ -22,11 +22,11 @@
   "scripts": {
     "start": "grunt dev",
     "test": "grunt test",
+    "clean": "echo 'hey'",
     "postinstall": "./node_modules/bower/bin/bower install"
   },
   "engines": {
-    "node": "0.8.x",
-    "npm": "1.2.x"
+    "node": "0.8.x"
   },
   "devDependencies": {
     "sinon": "~1.7.2",
@@ -50,6 +50,7 @@
     "karma": "~0.10.9",
     "karma-junit-reporter": "~0.2.1",
     "karma-mocha": "~0.1.1",
-    "karma-chai": "0.0.2"
+    "karma-chai": "0.0.2",
+    "grunt-contrib-clean": "~0.5.0"
   }
 }
