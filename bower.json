@@ -5,7 +5,6 @@
     "angular-ui-router": "0.2.8-bowratic-tedium",
     "bootstrap": "~3.1.0",
     "font-awesome": "~4.0.3",
-    "underscore": "~1.5.2",
     "angular-cookies": "~1.2.12"
   },
   "devDependencies": {

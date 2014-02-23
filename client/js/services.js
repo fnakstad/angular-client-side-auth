@@ -10,7 +10,7 @@ angular.module('angular-client-side-auth')
     $cookieStore.remove('user');
 
     function changeUser(user) {
-        _.extend(currentUser, user);
+        angular.extend(currentUser, user);
     };
 
     return {

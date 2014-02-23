@@ -31,42 +31,42 @@ describe('services', function() {
     describe('instantiate', function() {
       it('should have isLoggedIn function', function() {
         expect(Auth.isLoggedIn).to.not.be.undefined;
-        expect(_.isFunction(Auth.isLoggedIn)).to.equal(true);
+        expect(angular.isFunction(Auth.isLoggedIn)).to.equal(true);
       });
 
       it('should have authorize function', function() {
         expect(Auth.authorize).to.not.be.undefined;
-        expect(_.isFunction(Auth.authorize)).to.equal(true);
+        expect(angular.isFunction(Auth.authorize)).to.equal(true);
       });
 
       it('should have login function', function() {
         expect(Auth.login).to.not.be.undefined;
-        expect(_.isFunction(Auth.login)).to.equal(true);
+        expect(angular.isFunction(Auth.login)).to.equal(true);
       });
 
       it('should have logout function', function() {
         expect(Auth.logout).to.not.be.undefined;
-        expect(_.isFunction(Auth.logout)).to.equal(true);
+        expect(angular.isFunction(Auth.logout)).to.equal(true);
       });
 
       it('should have register function', function() {
         expect(Auth.register).to.not.be.undefined;
-        expect(_.isFunction(Auth.register)).to.equal(true);
+        expect(angular.isFunction(Auth.register)).to.equal(true);
       });
 
       it('should have the user object', function() {
         expect(Auth.user).to.not.be.undefined;
-        expect(_.isObject(Auth.user)).to.equal(true);
+        expect(angular.isObject(Auth.user)).to.equal(true);
       });
 
       it('should have the userRoles object', function() {
         expect(Auth.userRoles).to.not.be.undefined;
-        expect(_.isObject(Auth.userRoles)).to.equal(true);
+        expect(angular.isObject(Auth.userRoles)).to.equal(true);
       });
 
       it('should have the accessLevels object', function() {
         expect(Auth.accessLevels).to.not.be.undefined;
-        expect(_.isObject(Auth.accessLevels)).to.equal(true);
+        expect(angular.isObject(Auth.accessLevels)).to.equal(true);
       });
 
       it('should set the user object with no name and public role', function() {
