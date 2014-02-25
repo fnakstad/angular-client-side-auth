@@ -51,6 +51,7 @@
     "karma-junit-reporter": "~0.2.1",
     "karma-mocha": "~0.1.1",
     "karma-chai": "0.0.2",
-    "grunt-contrib-clean": "~0.5.0"
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-cli": "~0.1.13"
   }
 }
