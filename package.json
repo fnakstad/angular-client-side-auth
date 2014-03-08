@@ -23,7 +23,7 @@
     "start": "grunt dev",
     "test": "grunt test",
     "clean": "echo 'hey'",
-    "postinstall": "./node_modules/bower/bin/bower install"
+    "postinstall": "bower install"
   },
   "engines": {
     "node": "0.8.x"

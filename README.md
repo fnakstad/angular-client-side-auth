@@ -11,7 +11,7 @@ One way to implement authentication/authorization in Angular applications.
 * [Live version](http://angular-client-side-auth.herokuapp.com/)
 * [UI-router and angular-client-side-auth](http://www.frederiknakstad.com/2014/02/09/ui-router-in-angular-client-side-auth/)
 
-To run the server locally, open a terminal, and navigate to the directory you cloned the project to. Then run the following commands:
+To run the server locally, open a terminal, and navigate to the directory you cloned the project to. Make sure you have Node/NPM and Bower installed! Then run the following commands:
 
 ```
 npm install
