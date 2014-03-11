@@ -128,13 +128,10 @@ angular.module('angular-client-side-auth', ['ngCookies', 'ui.router'])
             'responseError': function(response) {
                 if(response.status === 401 || response.status === 403) {
                     $location.path('/login');
-                    return $q.reject(response);
                 }
-                else {
-                    return $q.reject(response);
-                }
+                return $q.reject(response);
             }
-        }
+        };
     });
 
 }])
@@ -147,9 +144,9 @@ angular.module('angular-client-side-auth', ['ngCookies', 'ui.router'])
             event.preventDefault();
             
             if(fromState.url === '^') {
-                if(Auth.isLoggedIn())
+                if(Auth.isLoggedIn()) {
                     $state.go('user.home');
-                else {
+                } else {
                     $rootScope.error = null;
                     $state.go('anon.login');
                 }
