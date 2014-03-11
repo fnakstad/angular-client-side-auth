@@ -11,19 +11,21 @@ angular.module('angular-client-side-auth')
 
     function changeUser(user) {
         angular.extend(currentUser, user);
-    };
+    }
 
     return {
         authorize: function(accessLevel, role) {
-            if(role === undefined)
+            if(role === undefined) {
                 role = currentUser.role;
+            }
 
             return accessLevel.bitMask & role.bitMask;
         },
         isLoggedIn: function(user) {
-            if(user === undefined)
+            if(user === undefined) {
                 user = currentUser;
-            return user.role.title == userRoles.user.title || user.role.title == userRoles.admin.title;
+            }
+            return user.role.title === userRoles.user.title || user.role.title === userRoles.admin.title;
         },
         register: function(user, success, error) {
             $http.post('/register', user).success(function(res) {
