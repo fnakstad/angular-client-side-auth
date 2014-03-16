@@ -6,8 +6,6 @@ node_js:
 - '0.6'
 env:
   global:
-  - secure: 
-  matrix:
   - secure: ED0+LU7O2Bk8oOEllanXBpcRpAuBs0uGoDKTMjMjrhZG5NLhMOnQyQivhJb2YME1LPrDUXmq0fwvzTyuBg8FzKKXlgkd7AxkrLVp+e7kdiJ6beUBHQPgDu39+DKr+HKDtmEUGAaA9UXjGrZDD7AlhrZ9hNNRcc1s0oKm5dxq/GU=
   - secure: UqgUXa5J8uVMclZhfVoileYalPo6fWGBTQ1kjt9GAI4WfALvlznk9/biZvDSIy1roSVU6WPt+DIprOrte3jxjV8FRWyu4dFEyECQFzFATVFODXFKl6LMXo/kQPSfAmBJNpiyOxRiT9t8DsR4eW0sHXEcy6jSNodiVkj5Gz4EDkY=
   - secure: Gg9YDP0yZJ/0vHxCS5JWY+yNrr8bCT9LXHaF/MG2Gz+FvsUh5IVN16WG2Zg/PZS3b2nYnOsgIjmqg9O3yqe0YrX+0QjLLlsZXDccej+YGkgosk3wyhiR3rB/lA8j9hBFfLekyV9RYxndstdSthfMV2phxzuS5nul17si5A7M9IA=
