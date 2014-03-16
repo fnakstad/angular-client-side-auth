@@ -22,7 +22,6 @@
   "scripts": {
     "start": "grunt dev",
     "test": "grunt test",
-    "clean": "echo 'hey'",
     "postinstall": "bower install"
   },
   "engines": {
