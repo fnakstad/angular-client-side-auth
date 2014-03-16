@@ -1,8 +1,22 @@
 language: node_js
-
 node_js:
-  - "0.11"
-  - "0.10"
-  - "0.8"
-  - "0.6"
-
+- '0.11'
+- '0.10'
+- '0.8'
+- '0.6'
+env:
+  global:
+  - secure: 
+  matrix:
+  - secure: ED0+LU7O2Bk8oOEllanXBpcRpAuBs0uGoDKTMjMjrhZG5NLhMOnQyQivhJb2YME1LPrDUXmq0fwvzTyuBg8FzKKXlgkd7AxkrLVp+e7kdiJ6beUBHQPgDu39+DKr+HKDtmEUGAaA9UXjGrZDD7AlhrZ9hNNRcc1s0oKm5dxq/GU=
+  - secure: UqgUXa5J8uVMclZhfVoileYalPo6fWGBTQ1kjt9GAI4WfALvlznk9/biZvDSIy1roSVU6WPt+DIprOrte3jxjV8FRWyu4dFEyECQFzFATVFODXFKl6LMXo/kQPSfAmBJNpiyOxRiT9t8DsR4eW0sHXEcy6jSNodiVkj5Gz4EDkY=
+  - secure: Gg9YDP0yZJ/0vHxCS5JWY+yNrr8bCT9LXHaF/MG2Gz+FvsUh5IVN16WG2Zg/PZS3b2nYnOsgIjmqg9O3yqe0YrX+0QjLLlsZXDccej+YGkgosk3wyhiR3rB/lA8j9hBFfLekyV9RYxndstdSthfMV2phxzuS5nul17si5A7M9IA=
+  - secure: MPgASha8a2ex7RYQPBMZT99uswR446MY/rcl16eO/YI8vo2XH8nKP03kH0ugNe/TsCZ1gPRJnAS+MGfg+SeZDOol1Zgty8yd1sEEDkOy7Rdaz10fZcybgzotzAXxtlWefzWPIngwFIT9rUnfiYgtUNDmwSJ0qi+axkehhWOH+X8=
+  - secure: RhDrpOWHREqyY7BLCOe4VodAxyfkANDPTX5O1SA1DUtgUG/5PMvUcZXUGCL+o6vbbpWm29NQI6ttiyulVEnzU87I9vNmTWZHau4ha6IhBqZmPIc3/hXnxuEvegGMr7Rgw3KLwvEFyCPMdS2LTcmGHUkpC4zJIP+4tzEWr9GpDY4=
+  - secure: PXqfazKG1nSZ5+DxSLmxaIMPgUP0EK+IeHd6lOc6vKKn7Ax5yeH7f8FdyU9ZufVrmV1Fnk+yiTqdzRwK8yjF08cPOlNdZLVW1816chKS/Da52KsttoKLQnukCraAxkhf81+FSi1w3pkdMiAQbF40YsDBi3dc/AnrJrC6d9YIDAY=
+  - secure: V4WZW2w+tH++UclrvdQKncDyPRS6Lkl1WO3tLoIe31B4K5exSHvFxZ2VtQalLMR6aZOvKvfOYeR921mjrYcNWD99UjLa0zsPnT2jq25l4xSzHmWkwxSZLovHYdfVGUMRfGwJ4wfQokoyi7kxoC1vkHvRnYVK9B4xvhkFbApKGWc=
+  - secure: IAJEt6xH/OEzZ9SbEOhYZlDHWgLc2RT4WL2HwVazGfF2jJ/d/Z8hq+tfwPqqGzusUZH9rtVdZwsggQm1vro87j2juvvQpk8JqejNrsHOCHJtg6g06yArgFlJYl1c4ApIZDH8WQoslomYrJT5QJ3bFTeSzsNWPfWvPYjqN6GFTyY=
+  - secure: coTXjqC53pSpjysC/48B5TDzl6bjnVpCqiUQOnrhRQfXhDeIUkQKOvF4y94x2NEG1XG5Yo3xVn69arIHZ57lHxPEdRQbm/vCMxOGYxjd/BTivSk47X4E4uTptRZuywd9RyqGmlm4lKysN3OVN2rpcqnSyypGiMsNI54fVFvP7/c=
+  - secure: bcCO0Omod0F1VxzGOmXIsFH1TtVpdhG4DolmOsAlzL+GT9n0L3Pn0NRpB3meavqo/BYTA/GyIAAWZy8SYRKNMSLbF+omZu/pEvxeasHV2TxdSRuSkownZzbIXWpupzv8TLsEqHzCEAbH/mYJu0YyXbu+XkurCMhlVX4MmqR+QJk=
+  - secure: dRpiJaOJswRKUYyQJ7jAqBWutqbZA6qNCLz7srRkzJQunb50zl/BuuOKX0Oi7gbW7nv4iY7Yjt2o+giopSqv8WElxprLCnqKQ1S8UBAwIkm/BMfcc+zQkGQWW6aprlr07rJQ8ol8j0uYgd3oFbzFdgeSM85C06D7gEpIayNYHRA=
+  - secure: NT0DavZOlgfNOOSImTPPHFIfYHtqUkCNsBC6btfJ2gGduQbnfx2G1OSgAImTMXGU8UATiYHWVhBylpUm7hmRnAHYQT9CeAJtT59IAEpQI9BMnnkatnHSEX/rPFP5iydcRcNxTQBOGJDY/Sv8U8KxzOtiN0eE7n5U0Gx1ntS8Tls=
