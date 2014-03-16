@@ -1,6 +1,8 @@
 angular-client-side-auth
 ========================
 
+[![Build Status](https://travis-ci.org/fnakstad/angular-client-side-auth.png?branch=master)](https://travis-ci.org/fnakstad/angular-client-side-auth)
+
 One way to implement authentication/authorization in Angular applications.
 
 **This repo now uses [UI-router](https://github.com/angular-ui/ui-router) rather than [ngRoute](http://docs.angularjs.org/api/ngRoute). For details on how this works [please read this post](http://www.frederiknakstad.com/2014/02/09/ui-router-in-angular-client-side-auth/).**
