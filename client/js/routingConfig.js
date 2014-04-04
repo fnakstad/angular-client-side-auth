@@ -13,7 +13,11 @@
 
         /*
         Build out all the access levels you want referencing the roles listed above
-        You can use the "*" symbol to represent access to all roles
+        You can use the "*" symbol to represent access to all roles.
+
+        The left-hand side specifies the name of the access level, and the right-hand side
+        specifies what user roles have access to that access level. E.g. users with user role
+        'user' and 'admin' have access to the access level 'user'.
          */
         accessLevels : {
             'public' : "*",
