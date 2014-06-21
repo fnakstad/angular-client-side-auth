@@ -1,30 +1,39 @@
-var express =       require('express')
-    , http =        require('http')
-    , passport =    require('passport')
-    , path =        require('path')
-    , User =        require('./server/models/User.js');
+var express =           require('express')
+    , http =            require('http')
+    , passport =        require('passport')
+    , path =            require('path')
+    , morgan =          require('morgan')
+    , bodyParser =      require('body-parser')
+    , methodOverride =  require('method-override')
+    , cookieParser =    require('cookie-parser')
+    , cookieSession =   require('cookie-session')
+    , session =         require('express-session')
+    , csrf =            require('csurf')
+    , User =            require('./server/models/User.js');
 
 var app = module.exports = express();
 
 app.set('views', __dirname + '/client/views');
 app.set('view engine', 'jade');
-app.use(express.logger('dev'))
-app.use(express.bodyParser());
-app.use(express.methodOverride());
+app.use(morgan('dev'));
+app.use(bodyParser.urlencoded());
+app.use(bodyParser.json());
+app.use(methodOverride());
 app.use(express.static(path.join(__dirname, 'client')));
-app.use(express.cookieParser());
-app.use(express.cookieSession(
+app.use(cookieParser());
+app.use(session(
     {
         secret: process.env.COOKIE_SECRET || "Superdupersecret"
     }));
 
-app.configure('development', 'production', function() {
-    app.use(express.csrf());
+var env = process.env.NODE_ENV || 'development';
+if ('development' === env || 'production' === env) {
+    app.use(csrf());
     app.use(function(req, res, next) {
         res.cookie('XSRF-TOKEN', req.csrfToken());
         next();
     });
-});
+}
 
 app.use(passport.initialize());
 app.use(passport.session());
