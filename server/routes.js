@@ -147,8 +147,7 @@ function ensureAuthorized(req, res, next) {
     var role;
     if(!req.user) role = userRoles.public;
     else          role = req.user.role;
-
-    var accessLevel = _.findWhere(routes, { path: req.route.path, httpMethod: req.route.method.toUpperCase() }).accessLevel || accessLevels.public;
+    var accessLevel = _.findWhere(routes, { path: req.route.path, httpMethod: req.route.stack[0].method.toUpperCase() }).accessLevel || accessLevels.public;
 
     if(!(accessLevel.bitMask & role.bitMask)) return res.send(403);
     return next();

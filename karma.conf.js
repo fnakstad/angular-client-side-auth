@@ -7,7 +7,6 @@ module.exports = function(config){
             'components/angular-cookies/angular-cookies.js',
             'components/angular-mocks/angular-mocks.js',
             'components/angular-ui-router/release/angular-ui-router.js',
-            'components/underscore/underscore.js',
             'js/**/*.js',
             'tests/unit/**/*.js'
         ],
