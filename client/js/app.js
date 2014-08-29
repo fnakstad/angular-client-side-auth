@@ -140,7 +140,7 @@ angular.module('angular-client-side-auth', ['ngCookies', 'ui.router'])
 
     $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
         
-        if(!("data.access" in toState)){
+        if( !("data" in toState)|| !("access" in toState.data)){
             $rootScope.error = "Access undefined for this state";
             event.preventDefault();
         }
