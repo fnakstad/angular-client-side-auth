@@ -7,7 +7,6 @@ angular.module('angular-client-side-auth')
         , userRoles = routingConfig.userRoles
         , currentUser = $cookieStore.get('user') || { username: '', role: userRoles.public };
 
-    $cookieStore.remove('user');
 
     function changeUser(user) {
         angular.extend(currentUser, user);
